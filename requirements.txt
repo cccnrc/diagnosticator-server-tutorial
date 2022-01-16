@@ -2,7 +2,7 @@ alembic==0.9.6
 Babel==2.5.1
 blinker==1.4
 certifi==2017.7.27.1
-cffi==1.14.4
+#cffi==1.14.4
 chardet==3.0.4
 click==6.7
 cryptography==3.2.1
@@ -26,9 +26,9 @@ Jinja2==2.10
 Mako==1.0.7
 MarkupSafe==1.1.1
 mysql-connector-python==8.0.22
-mysqlclient==2.0.1
+#mysqlclient==2.0.1
 protobuf==3.14.0
-pycparser==2.20
+#pycparser==2.20
 pycrypto==2.6.1
 PyJWT==1.5.3
 pymongo==3.11.1
@@ -52,7 +52,7 @@ boto3==1.18.21
 cffi==1.14.4
 cryptography
 DateTime==4.3
-Flask-HTTPAuth==4.2.0
+Flask-HTTPAuth
 mysqlclient==2.0.2
 pycparser==2.20
 PyMySQL
