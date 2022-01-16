@@ -50,14 +50,14 @@ WTForms==2.1
 # added requirements
 boto3==1.18.21
 cffi==1.14.4
-cryptography==3.3.2
+cryptography
 DateTime==4.3
 Flask-HTTPAuth==4.2.0
 mysqlclient==2.0.2
 pycparser==2.20
-PyMySQL==0.10.1
+PyMySQL
 zope.interface==5.2.0
 
 # requirements for Heroku
 psycopg2==2.9.1
-gunicorn==20.1.0
+gunicorn
