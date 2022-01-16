@@ -19,6 +19,7 @@ README-DEVELOPMENT.md
 README-DEPLOY.md
 README-APP_DEVELOPMENT.md
 README-AWS-DEPLOY.md
+README-CERTIFICATE.md
 docker.README.md
 docker-compose*
 .flaskenv
@@ -31,3 +32,5 @@ TIME-ANALYSIS
 Dockerfile
 redis_data
 boot.sh
+diagnosticator.service
+CERTS
