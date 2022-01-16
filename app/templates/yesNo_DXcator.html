@@ -1,0 +1,74 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+  .ui-helper-center {
+      text-align: center;
+  }
+
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+</style>
+
+<div style=" margin-top: 5%; margin-bottom: 5%; display: inline-block; float: right; border: 0px solid blue; max-width: 100%; background-color: rgba(255, 0, 0, 0.3); " >
+  <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+  <div style="text-align: center; font-size: 150%; padding: 5%;" >
+    <stream style="color: green; font-weight: bold;">Last step!</stream>
+    <br>
+    <br>
+    This page simply reminds you that if you have another project results in your local application this action would overwrite it
+    <br>
+    <br>
+    This is necessary to avoid fill you computer with data you're no longer analyzing and improve the app performance
+    <br>
+    <br>
+    If you want to have multiple projects on your local machine read the documentation <a href="{{ SERVER_ADDRESS }}/multiple_projects" target="_blank">here</a>
+  </div>
+</div>
+
+
+<div>
+<form action="" method="post">
+  <div style="margin-top: 20%; text-align: center;">
+    <h3>
+      {% for line in body_dict %}
+      <div style="margin-top: 2%; color: {{ body_dict[ line ]['color' ]}}; font-weight: {{ body_dict[ line ]['weight']}}; font-size: {{ body_dict[ line ]['size']}}">
+        {{ body_dict[ line ]['text'] }}
+      </div>
+      {% endfor %}
+    </h3>
+  </div>
+  <div style="margin-top: 5%; text-align: center;">
+    <input style="margin-right: 1%;" class="btn btn-success" name="choice"  type="submit" value="Yes"/>
+    <input class="btn btn-danger"  name="choice" type="submit" value="No"/>
+  </div>
+</form>
+</div>
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+{% endblock %}

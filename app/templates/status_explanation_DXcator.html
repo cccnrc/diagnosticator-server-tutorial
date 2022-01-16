@@ -1,0 +1,113 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style media="screen">
+  .button-example {
+      color: white;
+      font-weight: bold;
+      border: 0.5px solid black;
+      padding: 0.5%;
+      border-radius: 10px;
+  }
+
+  ul li {
+    background: #cce5ff;
+    margin: 0.5%;
+    padding: 0.5%;
+  }
+  ul {
+    background: #3399ff;
+    padding: 1%;
+  }
+</style>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-CASE0">
+  <div class="inner" style="width: 90%;">
+    <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
+      <div style="text-align: left;">
+        Hi <stream style="font-weight: bold;">{{ current_user.server_username }}</stream>,
+        this is how our team found it most useful to flag variants and samples:
+        <br>
+        <ul>
+          <li>
+            <stream style="font-weight: bold;">Diagnostic Finding</stream>
+            <stream class="button-example" style="background-color: #00cc22;">DF</stream>:
+            this is used for variants that reach Pathogenic/Likely-Pathogenic (P/LP) ACMG classification
+            in a sample with matching phenotype with the gene association (thus clinically relevant)
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Secondary Finding</stream>
+            <stream class="button-example" style="background-color: #0a4df5;">SF</stream>:
+            this is used for variants that reach P/LP ACMG classification
+            in a gene that doesn't match sample's phenotype but it's part of
+            <a href="https://www.ncbi.nlm.nih.gov/clinvar/docs/acmg/" target="_blank">ACMG 59</a>
+            actionable genes (thus clinically relevant)
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Negative Result</stream>
+            <stream class="button-example" style="background-color: #f50a0a;">NE</stream>:
+            this is used for variants that does not reach P/LP ACMG classification
+            that you want to discard
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Unknown Significance</stream>
+            <stream class="button-example" style="background-color: #f5e50a;">US</stream>:
+            this is generally used for variants that reach Unknown Significance (US) ACMG classification
+            that you want to flag in order to keep track of them
+        </li>
+      </ul>
+
+      <br>
+      You will also find the same values but in <stream style="font-weight: bold;">Temporary</stream> status (paler color),
+      we normally use them when we want to come back to the variant/sample in a future moment:
+      <br>
+      <ul style="background-color: #7abdff">
+        <li style="background-color: #e6f2ff">
+          <stream style="font-weight: bold;">Diagnostic Finding (temporary)</stream>
+          <stream class="button-example" style="background-color: #00cc22; opacity: 0.4;">Dr</stream>:
+          when close to Diagnostic Finding (defined above), but needing further review
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Secondary Finding</stream>
+            <stream class="button-example" style="background-color: #0a4df5; opacity: 0.4;">SF</stream>:
+            when close to Secondary Finding (defined above), but needing further review
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Negative Result</stream>
+            <stream class="button-example" style="background-color: #f50a0a; opacity: 0.4;">NE</stream>:
+            when close to Negative Result (defined above), but needing further review
+        </li>
+        <li>
+            <stream style="font-weight: bold;">Unknown Significance</stream>
+            <stream class="button-example" style="background-color: #f5e50a; opacity: 0.4;">US</stream>:
+            when close to Unknown Significance (defined above), but needing further review
+        </li>
+        <li>
+            <stream style="font-weight: bold;">In Progress</stream>
+            <stream class="button-example" style="background-color: #grey; color: #1200d1; opacity: 0.4;">IP</stream>:
+            when you have no idea about classification and want to come back later
+        </li>
+      </ul>
+
+      <br>
+      You also have a way to <stream style="font-weight: bold;">Restore</stream> initial status (no flag) if you changed your mind:
+      <stream class="button-example" style="color: black; background-color: white;">restore</stream>
+      <br>
+      <br>
+      <br>
+      This is how we imagined and used it, but if you have any better idea
+      <stream style="text-decoration: underline;">please share it</stream> with us, so we can evaluate togheter
+      how to improve it! &#128536
+      </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

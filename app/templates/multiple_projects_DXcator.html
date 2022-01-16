@@ -1,0 +1,120 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+  .ui-helper-center {
+      text-align: center;
+  }
+
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+
+  pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 80%;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+  }
+
+  code {
+    font-family: monospace;
+    background: #f4f4f4;
+  }
+
+</style>
+
+<div style=" margin-top: 5%; margin-bottom: 5%; display: inline-block; float: right; border: 0px solid blue; max-width: 100%; background-color: rgba(255, 0, 0, 0.3); " >
+  <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+  <div style="text-align: center; font-size: 150%; padding: 5%;" >
+    <stream style="color: green; font-weight: bold; font-size: 120%;">Need More?!</stream>
+    <br>
+    <br>
+    <div style="text-align: left; float: left; padding: 0%;">
+    If you got here you want to analyze more than one project, this requires a (minimal) knowledge of <a href="https://docs.docker.com/compose/" target="_blank">Docker-Compose</a> functioning
+    <br>
+    <br>
+    Basically, all your local data lives in the <a href="https://redis.io" target="_blank">Redis</a> docker DB you start alongside <a href="{{ SERVER_ADDRESS }}" target="_blank">Diagnosticator</a>
+    <br>
+    <br>
+    Guess you already understood that if you want to have multiple projects you need multiple Redis instances connected to multiple Diagnsticator local applications
+    <br>
+    <br>
+    In order to do so you just need to run other Diagnosticator instances (relying on different Redis databases) with different local IP addresses, in order to avoid overlap.
+    <br>
+    <br>
+    <stream style="font-weight: bold;">1.</stream> Create <stream style="text-decoration: underline;">another folder</stream> in which you store the <code>docker-compose.yml</code> file you are gonna modify and build.
+    <br>
+    <stream style="font-weight: bold;">2.</stream> Identify the <code>docker-redis</code> section (inside your <code>docker-compose.yml</code>) and change the value of the first port (default <code>6380</code>)
+    to any other <a href="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers" target="_blank">TCP port</a> you wish (that is not busy on your PC):
+    <pre>
+      <div style="text-align: left; float: left; padding: 0%;">
+      ...
+      docker-redis:
+          image: redis:latest
+          container_name: redis
+          ports:
+            - "<stream style="color: red;">6380</stream>:6379"
+      ...
+      </div>
+    </pre>
+    <stream style="font-weight: bold;">3.</stream> Change the port that is serving Diagnosticator application in <code>docker-diagnosticator</code>
+    section:
+    <pre>
+      <div style="text-align: left; float: left; padding: 0%;">
+      ...
+          ports:
+            - "<stream style="color: red;">9000</stream>:5000"
+          expose:
+            - "<stream style="color: red;">9000</stream>"
+      ...
+      </div>
+    </pre>
+    <stream style="text-decoration: underline;">IMPORTANT</stream>: this is the port you specify in the browser URL when accessing it, so if you change it to, as example, <code>9001</code>
+    then you have to access: <code>http://localhost:9001</code>, and you will have the other instance running on <code>http://localhost:9000</code>
+    <br>
+    <br>
+    <stream style="font-weight: bold;">4.</stream> Simply build this <code>docker-compose.yml</code> and enjoy your supplemental Diagnosticator app!
+    <br>
+    <br>
+  </div>
+  </div>
+</div>
+
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+{% endblock %}

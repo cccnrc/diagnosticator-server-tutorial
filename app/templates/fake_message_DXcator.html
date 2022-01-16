@@ -1,0 +1,22 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-CASE0">
+  <div class="inner" style="width: 50%;">
+    <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
+      Hi <stream style="font-weight: bold;">{{ current_user.server_username }}</stream>, a variant you found in your project:
+      <stream id="programming">{{ variant_name }}</stream> has been annotated as Pathogenic
+      by another user, take a look at it: <a href="{{ url_for('main.variant_page', variant_name = variant_name )}}" target="_blank">{{ variant_name }}</a>
+      <br>
+      <br>
+      You might have missed something &#128531 or maybe some new data came out &#128540;
+  </div>
+</div>
+
+
+
+{% endblock %}

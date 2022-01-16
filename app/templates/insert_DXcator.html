@@ -1,0 +1,25 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<h1>{{ title }}</h1>
+<div class="row">
+
+    {% if text_dict %}
+    {% if 'text' in text_dict %}
+      <div class="alert alert-{{ text_dict['text_category'] }}" role="alert" style="">
+          {{ text_dict['text']|capitalize }}
+          {% if 'link' in text_dict and 'link_text' in text_dict %}
+            <a href="{{ text_dict['link'] }}" target="_blank">{{ text_dict['link_text'] }}</a>
+          {% endif %}
+      </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+
+{% endblock %}

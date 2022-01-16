@@ -1,0 +1,107 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+
+  div#external {
+    border: 0px solid #eee;
+    position: relative;
+    text-align: center;
+  }
+  div#external > ul {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    position: relative;
+  }
+  div#external:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    font-size: 150%;
+    border-bottom: 3px solid red;
+    border-top: 3px solid red;
+    padding: 2%;
+    text-align: center;
+  }
+  div#external > dl {
+    visibility: visible;
+    opacity: 1;
+    vertical-align: middle;
+  }
+  div#external:hover > dl {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .vertical-center {
+    margin: 0;
+    margin-left: -40%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    color: #D40000;
+    font-weight: normal;
+    font-size: 180%;
+    font-family: monospace;
+    max-width: 80%;
+    border: 0px solid blue;
+  }
+
+</style>
+
+
+    <div id="external">
+      <dl>
+        <div class="vertical-center">
+          Tutorial <img style="max-width: 4%;" src="{{ url_for( 'static', filename = 'mouse-icon.png') }}"/>
+        </div>
+      </dl>
+      <ul>
+        <stream style="color: #D40000; font-weight: bold; font-size: 120%;">Last step!</stream>
+        <br>
+        <br>
+        This page simply reminds you that if you have another project results in your local application this action would overwrite it
+        <br>
+        This is necessary to avoid fill you computer with data you're no longer analyzing and improve the app performance
+        <br>
+        If you want to have multiple projects on your local machine read the documentation <a href="{{ SERVER_ADDRESS }}/multiple_projects" target="_blank">here</a>
+      </ul>
+    </div>
+
+
+<div>
+<form action="" method="post">
+  <div style="margin-top: 10%; text-align: center;">
+    <h3>
+      {% for line in body_dict %}
+      <div style="margin-top: 2%; color: {{ body_dict[ line ]['color' ]}}; font-weight: {{ body_dict[ line ]['weight']}}; font-size: {{ body_dict[ line ]['size']}}">
+        {{ body_dict[ line ]['text'] }}
+      </div>
+      {% endfor %}
+    </h3>
+  </div>
+  <div style="margin-top: 5%; text-align: center;">
+    <input style="margin-right: 1%;" class="btn btn-success" name="choice"  type="submit" value="Yes"/>
+    <input class="btn btn-danger"  name="choice" type="submit" value="No"/>
+  </div>
+</form>
+</div>
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+{% endblock %}

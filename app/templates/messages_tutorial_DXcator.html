@@ -1,0 +1,97 @@
+{% extends "base_DXcator.html" %}
+
+{% block app_content %}
+<style>
+
+  div#external {
+    border: 0px solid #eee;
+    position: relative;
+    text-align: center;
+  }
+  div#external > ul {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    position: relative;
+  }
+  div#external:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    font-size: 150%;
+    border-bottom: 3px solid red;
+    border-top: 3px solid red;
+    padding: 2%;
+    text-align: center;
+  }
+  div#external > dl {
+    visibility: visible;
+    opacity: 1;
+    vertical-align: middle;
+  }
+  div#external:hover > dl {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .vertical-center {
+    margin: 0;
+    margin-left: -40%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    color: #D40000;
+    font-weight: normal;
+    font-size: 180%;
+    font-family: monospace;
+    max-width: 80%;
+    border: 0px solid blue;
+  }
+
+</style>
+
+
+    <div id="external">
+      <dl>
+        <div class="vertical-center">
+          Tutorial <img style="max-width: 4%;" src="{{ url_for( 'static', filename = 'mouse-icon.png') }}"/>
+        </div>
+      </dl>
+      <ul>
+        <stream style="color: #D40000; font-weight: bold; font-size: 120%;">Chatting</stream>
+        <br>
+        <br>
+        In this page you will see all the messages sent to you from both our
+        <a href="{{ SERVER_ADDRESS }}" target="_blank">Central Server</a> and our Local App
+        <br>
+        These messages will inform you regarding possible changes happened to your variants annotation,
+        VCF analysis status, etc.
+        <br>
+        Don't worry, you will see a notification icon on the top-right just next to the
+        <a href="{{ url_for('main.messages') }}">Messages</a> button 
+        whenever something new arrives!
+      </ul>
+    </div>
+
+
+    <h1>Messages</h1>
+    {% for post in messages %}
+        {% include '_post_DXcator.html' %}
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Newer messages
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    Older messages <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

@@ -1,0 +1,14 @@
+<table class="table table-hover">
+    <tr>
+        <td>
+          <div>
+            <button class="btn btn-info" style="border: 0px solid #308eff;">
+              {{ moment(post.timestamp).fromNow() }}
+            </button>
+          </div>
+          <div style="border: 0px solid grey; margin-top: 2%; margin-left: 3%; opacity: 1;">
+            <span id="post{{ post.id }}" style="color: grey; opacity: 1;">{{ post.body }}</span>
+          </div>
+        </td>
+    </tr>
+</table>

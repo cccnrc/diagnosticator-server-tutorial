@@ -1,0 +1,73 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+</style>
+
+    <div style=" margin-top: 5%; margin-right: 10%; display: inline-block; float: right; border: 0px solid blue; max-width: 50%; background-color: rgba(255, 0, 0, 0.3); " >
+      <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+      <div style="text-align: center; font-size: 150%; padding: 5%;" >
+        <stream style="color: green; font-weight: bold;">Almost there!</stream>
+        <br>
+        <br>
+        This is the crucial <stream style="font-weight: bold;">fifth step</stream>: <stream style="text-decoration: underline overline;">filtering</stream>
+        <br>
+        <br>
+        The whole point of Diagnosticator is helping you reducing the number of results to manually screen.
+        <br>
+        <br>
+        Help yourself further reducing it selecting a stringent Maximum  <stream style="text-decoration: underline;">Allele Frequency</stream>, Maximum <stream style="text-decoration: underline;">Allele Count</stream> and  <stream style="text-decoration: underline;">Variant Consequences</stream> to exclude.
+        <br>
+        <br>
+        You can find exhaustive documentation regarding those parameters <a href="{{ SERVER_ADDRESS }}/filtering" target="_blank">here</a>!
+        <br>
+        <br>
+        You also need a genelist file to specify the pool of genes you are interested in analyzing, you can find our Columbia Kidney genelist <a href="{{ SERVER_ADDRESS }}/download/kidney_acmg59.gl" target="_blank">here</a>!
+        You can also create your own based on that format
+        <br>
+        <br>
+        Once all the fields are completed, just click on <stream style="color: blue;">Submit</stream> and launch your analysis!
+      </div>
+    </div>
+
+    <!-- my addictions -->
+    <div style="" >
+    <div style="display: inline-block; float: right; " >
+    <div width="100%" style="text-align: right;" >
+        {{ current_user.username }}
+    </div>
+    </div>
+
+
+    <h1>Filters:</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+  <script>
+    window.onload = function(){
+        document.getElementById('close').onclick = function(){
+            this.parentNode.parentNode
+            .removeChild(this.parentNode);
+            return false;
+        };
+    };
+  </script>
+
+{% endblock %}

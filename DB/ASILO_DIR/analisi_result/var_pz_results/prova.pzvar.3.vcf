@@ -1,0 +1,7 @@
+3	129237990	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=IFT122;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-3;qual=NA;
+3	77666778	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=ROBO2;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+3	129200436	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=IFT122;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+3	45821594	.	T	C	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SLC6A20;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-1;qual=NA;
+3	10085530	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=FANCD2;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-2;qual=NA;
+3	10085532	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=FANCD2;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-2;qual=NA;
+3	37089130	.	AA	GC	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=MLH1;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-2;qual=NA;

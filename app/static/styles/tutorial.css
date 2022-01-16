@@ -1,0 +1,200 @@
+.AC {
+    background-color: #ccffa6;
+}
+.AR {
+    background-color: #ebffdb;
+}
+.US {
+    background-color: #dbdbdb;
+}
+.RR {
+    background-color: #ffdede;
+}
+.RE {
+    background-color: #ffb0b0;
+}
+.SE {
+    background-color: #b8c8ff;
+}
+.SR {
+    background-color: #d9e1ff;
+}
+.IP {
+    background-color: #fffcd9;
+}
+.NA {
+    background-color: #ffffff;
+}
+.ui-helper-center {
+    text-align: center;
+}
+
+td {
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+
+div.fadeMe {
+  background: #000;
+  width:      100%;
+  height:     100%;
+  z-index:    10;
+  top:        0;
+  left:       0;
+  position:   fixed;
+  background: rgba(179,179,201,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#close {
+    float:right;
+    display:inline-block;
+    padding: 0.2% 0.5%;
+    background: red;
+    font-size: 150%;
+}
+
+.inner {
+  display: block;
+  width: 60%;
+  z-index: 100;
+  background-color: rgba(255,255,255,1);
+  z-index: 2;
+  text-align : center;
+  font-size: 150%;
+  padding: 1% 1%;
+}
+
+.circle {
+    position: absolute;
+    background-color: none;
+    border: 5px solid;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    height: 4%;
+    width: 8%;
+}
+
+.list {
+  text-align: left;
+  font-size: 80%;
+  margin-left: 0.5%;
+}
+
+stream#red-text {
+  color: red;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+stream#orange-text {
+  color: orange;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+stream#blue-text {
+  color: blue;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+stream#purple-text {
+  color: purple;
+  font-weight: bold;
+}
+
+stream#programming {
+  color: black;
+  background-color: #D3D3D3;
+  font-family: monospace;
+}
+
+stream.subpoint {
+  padding-left: 5%;
+  border: 1px solid red;
+  width: 100%;
+  text-indent: 40%;
+}
+
+
+
+
+.pointer {
+  position: absolute;
+  border: 0px solid;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  height: 3%;
+  width: 8%;
+  background-color: red;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  opacity: 0.7;
+}
+
+@keyframes example {
+  0%   {background-color: red;}
+  25%  {background-color: yellow;}
+  50%  {background-color: red;}
+  100% {background-color: yellow;}
+}
+
+@keyframes highlight {
+  0%   {background-color: #ff0000; border: 300% solid #ff9999; font-weight: bold; font-size: 300%; }
+  25%  {background-color: #ff3333; border: 250% solid #ff6666; font-weight: bold; font-size: 250%; }
+  50%  {background-color: #ff6666; border: 200% solid #ff3333; font-weight: bold; font-size: 200%; }
+  75%  {background-color: #ff6666; border: 150% solid #ff3333; font-weight: bold; font-size: 150%; }
+  100% {background-color: #ff9999; border: 100% solid #ff0000; font-weight: bold;  font-size: 100%;}
+}
+
+@keyframes increase {
+  0%   { border: 140%; font-weight: bold; font-size: 140%; opacity: 0.5; border-color: #42FF00; color: black; }
+  25%   { border: 130%; font-weight: bold; font-size: 130%; opacity: 0.6; border-color: #42FF00; color: #42FF00; }
+  50%   { border: 120%; font-weight: bold; font-size: 120%; opacity: 0.7; border-color: #42FF00;  }
+  75%   { border: 110%; font-weight: bold; font-size: 110%; opacity: 0.8; border-color: #42FF00; }
+  100%   { border: 100%; font-weight: bold; font-size: 100%; opacity: 0.9; }
+}
+
+@keyframes increasered {
+  0%   { border: 140%; font-weight: bold; font-size: 140%; opacity: 0.9; border-color: red; color: red; }
+  25%   { border: 130%; font-weight: bold; font-size: 130%; opacity: 0.6; border-color: red; color: red; }
+  50%   { border: 120%; font-weight: bold; font-size: 120%; opacity: 0.7; border-color: red;  color: red; }
+  75%   { border: 110%; font-weight: bold; font-size: 110%; opacity: 0.8; border-color: red; color: red; }
+  100%   { border: 100%; font-weight: bold; font-size: 100%; opacity: 0.9; color: red; }
+}
+
+@keyframes increasefont {
+  0%   { font-size: 140%; }
+  25%   { font-size: 130%; }
+  50%   { font-size: 120%; }
+  75%   { font-size: 110%; }
+  100%   { font-size: 100%; }
+}
+
+
+
+
+.cool-button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

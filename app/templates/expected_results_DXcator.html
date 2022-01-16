@@ -1,0 +1,114 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style media="screen">
+  .button-example {
+      color: white;
+      font-weight: bold;
+      border: 0.5px solid black;
+      padding: 0.5%;
+      border-radius: 10px;
+  }
+
+  ul li {
+    background: #d0ffcc;
+    margin: 0.5%;
+    padding: 0.5%;
+  }
+  ul {
+    background: #dedede;
+    padding: 1%;
+  }
+</style>
+
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-CASE0">
+  <div class="inner" style="width: 90%;">
+    <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
+    <div style="text-align: left;">
+      Hi <stream style="font-weight: bold;">{{ current_user.server_username }}</stream>,
+      here the expected results for the samples in this tutorial:
+      <ul>
+        <li>
+          <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0' )}}" target="_blank">
+          <stream style="font-weight: bold;">CASE-0</stream></a>: variant
+          <a href="{{ url_for('main.variant_page', variant_name = 'X-107866056-G-C' )}}" target="_blank">
+            X-107866056-G-C</a> (<a href="https://www.omim.org/entry/303630" target="_blank">COL4A5</a>)
+            is a Diagnostic Finding
+        </li>
+        <li>
+          <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1' )}}" target="_blank">
+          <stream style="font-weight: bold;">CASE-1</stream></a>:
+          variant <a href="{{ url_for('main.variant_page', variant_name = '16-2149869-CAG-C' )}}" target="_blank">
+            16-2149869-CAG-C</a> (<a href="https://www.omim.org/entry/601313" target="_blank">PKD1</a>)
+            is a Diagnostic Finding
+            and
+            variant <a href="{{ url_for('main.variant_page', variant_name = '5-94833131-G-A' )}}" target="_blank">
+              5-94833131-G-A</a> (<a href="https://www.omim.org/entry/614589" target="_blank">TTC37</a>)
+              is a Negative Diagnostic Finding (heterozygous in AR gene)
+        </li>
+        <li>
+          <a href="{{ url_for('main.patient_page', sample_name = 'CASE-2' )}}" target="_blank">
+          <stream style="font-weight: bold;">CASE-2</stream></a>:
+          variant <a href="{{ url_for('main.variant_page', variant_name = 'X-107850123-G-C' )}}" target="_blank">
+            X-107850123-G-C</a> (<a href="https://www.omim.org/entry/303630" target="_blank">COL4A5</a>)
+            is a Diagnostic Finding
+        </li>
+        <li style="background: #bddbff;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CASE-3' )}}" target="_blank">
+          <stream style="font-weight: bold;">CASE-3</stream></a>:
+          variant <a href="{{ url_for('main.variant_page', variant_name = '13-32971124-CTG-C' )}}" target="_blank">
+            13-32971124-CTG-C</a> (<a href="https://www.omim.org/entry/600185" target="_blank">BRCA2</a>)
+            is a Secondary Finding (<a href="https://www.ncbi.nlm.nih.gov/clinvar/docs/acmg/"  target="_blank">ACMG59</a>)
+        </li>
+        <li style="background: #bddbff;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CASE-4' )}}" target="_blank">
+          <stream style="font-weight: bold;">CASE-4</stream></a>:
+          variant <a href="{{ url_for('main.variant_page', variant_name = '17-7577105-G-C' )}}" target="_blank">
+            17-7577105-G-C</a> (<a href="https://www.omim.org/entry/191170" target="_blank">TP53</a>)
+            is a Secondary Finding (<a href="https://www.ncbi.nlm.nih.gov/clinvar/docs/acmg/"  target="_blank">ACMG59</a>)
+        </li>
+        <li style="background: #f2f2f2;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-0' )}}" target="_blank">
+          <stream style="font-weight: bold;">CONTROL-0</stream></a>:
+          no P/LP variant
+        </li>
+        <li style="background: #ffc4c4;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-1' )}}" target="_blank">
+          <stream style="font-weight: bold;">CONTROL-1</stream></a>:
+          no Diagnostic Finding, variant
+          <a href="{{ url_for('main.variant_page', variant_name = '11-71146886-C-G' )}}" target="_blank">
+            11-71146886-C-G</a> (<a href="https://www.omim.org/entry/602858" target="_blank">DHCR7</a>)
+          is Pathogenic but heterozygous in AR gene (see link on gene name)
+        </li>
+        <li style="background: #ffc4c4;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-2' )}}" target="_blank">
+          <stream style="font-weight: bold;">CONTROL-2</stream></a>:
+          no Diagnostic Finding, variant
+          <a href="{{ url_for('main.variant_page', variant_name = '2-170343618-CTT-C' )}}" target="_blank">
+            2-170343618-CTT-C</a> (<a href="https://www.omim.org/entry/603650" target="_blank">BBS5</a>)
+          is Pathogenic but heterozygous in AR gene (see link on gene name)
+        </li>
+        <li style="background: #f2f2f2;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-3' )}}" target="_blank">
+          <stream style="font-weight: bold;">CONTROL-3</stream></a>:
+          no P/LP variant
+        </li>
+        <li style="background: #f2f2f2;">
+          <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-4' )}}" target="_blank">
+          <stream style="font-weight: bold;">CONTROL-4</stream></a>:
+          no P/LP variant
+        </li>
+      </ul>
+      Don't worry if you missed something, you will get better practicing with your real-life variants &#128526
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+
+</style>
+
+
+<body style="text-align: center; vertical-align: middle;"
+
+  <div>
+  <div style="margin-top: 15%; border: 0px solid blue; max-width: 100%; background-color: rgba(255, 0, 0, 0.3); " >
+    <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+    <div style="text-align: center; font-size: 150%; padding: 5%;" >
+      This is the <stream style="font-weight: bold;">first step</stream> to take in order to use Diagnosticator:
+      register on our <a href="{{ SERVER_ADDRESS  }}/auth/register" target="_blank" >central server </a> using your current e-mail address.
+      You will be asked to confirm it so be sure to type it correctly.
+      <br>
+      <br>
+      Diagnosticator is designed as a <stream style="font-weight: bold;">parent-child</stream> application:
+      your (extremely limited, see <a href="{{ SERVER_ADDRESS  }}/documentation" target="_blank" >documentation</a>) data will be stored only in the central server
+      that interacts with the local instances you actually use for you analysis
+      <br>
+      <br>
+      The username and password you choose to register on are
+      the same you will use for any local appplication.
+      <br>
+      <br>
+      <stream style="font-weight: bold; color: red;">
+        Store them in a safe place!
+      </stream>
+      <br>
+      <br>
+      Once you registered and confirmed you mail, just <a href="{{ url_for('auth.authenticate_on_server', next = url_for('main.project')) }}" >click here</a>!
+    </div>
+  </div>
+  </div>
+
+</body>
+
+
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+
+{% endblock %}

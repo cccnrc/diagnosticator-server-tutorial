@@ -1,0 +1,139 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<style>
+    .VS,.S,.M,.P {
+        background-color: #ffe6e6;
+    }
+    .BA,.BS,.BP {
+        background-color: #dcf7dc;
+    }
+    .NA {
+        background-color: #ffffff;
+    }
+    .ui-helper-center {
+        text-align: center;
+    }
+</style>
+
+
+
+<div style="display: inline-block; float: right; " >
+  <a href="{{ url_for('main.patient_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      Samples Main Page
+    </button>
+  </a>
+  <a href="{{ url_for('main.gene_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff; ">
+      Gene Main Page
+    </button>
+  </a>
+</div>
+
+
+
+<div style='font-weight: bold; text-align: center; font-size: 120%; margin-top: 10%;'>
+  Variant:
+  <a href="{{ url_for('main.variant_page', variant_name = variant_name )}}">
+  <button class="btn btn-primary" style="">
+    {{ variant_name }}
+  </button>
+  </a>
+</div>
+
+
+<div style='font-weight: bold; text-align: center; font-size: 120%; margin-top: 10%;'>
+  ACMG Verdict:
+  <a href="{{ url_for('main.variant_page', variant_name = variant_name )}}">
+  <button class="btn btn-{{ ACMG_classes_dict[ varACMG ][ 'btn-class' ] }}" style="{{ ACMG_classes_dict[ varACMG ][ 'btn-style' ] }}">
+    {{ ACMG_classes_dict[ varACMG ][ 'display' ] }}
+  </button>
+  </a>
+  <div style='font-weight: normal; text-align: center; font-size: 100%;'>
+  <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
+  <div id='testText' style='display: none; font-weight: bold; font-size: 120%'>
+  </div>
+</div>
+
+
+
+<div style='text-align: center; font-size: 100%; margin-top: 3%;'>
+
+<table class="table table-hover" >
+
+    <thead class="thead-dark">
+      <tr style="background-color: white; color: black;" >
+        <th class="ui-helper-center">
+          criteria
+        </th>
+        <th class="ui-helper-center">
+          accepted strength
+        </th>
+        <th class="ui-helper-center">
+          change
+        </th>
+      </tr>
+    </thead>
+
+
+      <tbody>
+        {% for k_family, k_dict in variant_dict.items() %}
+
+        {% if k_family == "ACMG" %}
+
+        {% for k, v in k_dict.items() %}
+
+          <tr class="{{ v }}">
+
+            <!-- subclass value -->
+            <td class="ui-helper-center box" id="{{ ACMG_strength_dict[ k ][ 'description' ] }}">
+              <button class="btn btn-{{ ACMG_strength_dict[ k ][ 'btn-class' ] }}" style="{{ ACMG_strength_dict[ k ][ 'btn-style' ] }}">
+                {{ ACMG_strength_dict[ k ][ 'display' ] }}
+              </button>
+            </td>
+
+            <!-- accepted stregth -->
+            <td class="ui-helper-center" style="font-weight: bold;">
+              {% if v != 'NA' %}
+              <button class="btn btn-{{ ACMG_subclass_dict[ v ][ 'btn-class' ] }}" style="{{ ACMG_subclass_dict[ v ][ 'btn-style' ] }}">
+                {{ ACMG_subclass_dict[ v ][ 'description' ] }}
+              </button>
+              {% endif %}
+            </td>
+
+            <td class="ui-helper-center" style="font-weight: bold;">
+              {% for subclass in ACMG_strength_dict[ k ][ 'subclass' ] %}
+                <a class="box" id="{{ ACMG_subclass_dict[ subclass ][ 'description' ] }}" href="{{ url_for('main.acmg_criteria_modify', variant_name = variant_name, criteria = k, value = subclass ) }}" >
+                  <button class="btn btn-{{ ACMG_subclass_dict[ subclass ][ 'btn-class' ] }}" style="{{ ACMG_subclass_dict[ subclass ][ 'btn-style' ] }}">
+                    {{ ACMG_subclass_dict[ subclass ][ 'display' ] }}
+                  </button>
+                </a>
+              {% endfor %}
+            </td>
+
+          </tr>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endfor %}
+      </<tbody>
+</table>
+</div>
+
+<script>
+  $('.box').on('mouseover', function (e) {
+      $('#testText')[0].innerHTML = this.id;
+      $('#testText')[0].style.display = 'block';
+  });
+  $('.box').on('mouseout', function (e) {
+      $('#testText')[0].style.display = 'none';
+  });
+</script>
+
+{% endblock %}

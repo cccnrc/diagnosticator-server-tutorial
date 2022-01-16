@@ -1,0 +1,74 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style>
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+
+</style>
+
+    <div style=" margin-top: 5%; margin-right: 10%; display: inline-block; float: right; border: 0px solid blue; max-width: 50%; background-color: rgba(255, 0, 0, 0.3); " >
+      <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+      <div style="text-align: center; font-size: 150%; padding: 5%;" >
+        <stream style="color: green; font-weight: bold;">Congratulations!</stream>
+        <br>
+        <br>
+        You successfully registered on the central server!
+        Welcome in our community :)
+        <br>
+        <br>
+        Let's face now the <stream style="font-weight: bold;">second step</stream>: <stream style="text-decoration: underline overline;">project creation</stream>
+        <br>
+        <br>
+        You want to compile each of these fields you see on the left in order to insert details about the files you are going to analyze
+        <br>
+        <br>
+        Then just click the "Submit" button at the bottom
+      </div>
+    </div>
+
+
+    <!-- my addictions -->
+    <div style="" >
+    <div style="display: inline-block; float: right; " >
+    <div width="100%" style="text-align: right;" >
+        {{ current_user.username }}
+    </div>
+    </div>
+
+
+    <h1>Project:</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+{% endblock %}

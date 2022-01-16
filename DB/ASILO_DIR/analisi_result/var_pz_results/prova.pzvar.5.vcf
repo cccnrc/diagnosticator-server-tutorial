@@ -1,0 +1,12 @@
+5	1212491	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SLC6A19;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-3;qual=NA;
+5	145552304	.	T	C	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=LARS;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-3;qual=NA;
+5	60199493	.	A	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=ERCC8;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-0;qual=NA;
+5	180040079	.	A	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=FLT4;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+5	1212491	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SLC6A19;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+5	150715064	.	A	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SLC36A2;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+5	180047976	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=FLT4;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+5	37184908	.	C	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=C5orf42;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-4;qual=NA;
+5	122718686	.	T	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=CEP120;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-4;qual=NA;
+5	94833131	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=TTC37;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-1;qual=NA;
+5	112174643	.	A	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=APC;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-1;qual=NA;
+5	94886320	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=TTC37;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-2;qual=NA;

@@ -1,0 +1,144 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style>
+  .ui-helper-center {
+      text-align: center;
+  }
+
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+
+</style>
+
+
+
+<html>
+
+  <head>
+    <title>VCF Upload</title>
+  </head>
+  <body>
+
+
+
+    <div style=" margin-top: 5%; margin-bottom: 5%; display: inline-block; float: right; border: 0px solid blue; max-width: 100%; background-color: rgba(255, 0, 0, 0.3); " >
+      <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+      <div style="text-align: center; font-size: 150%; padding: 5%;" >
+        <stream style="color: green; font-weight: bold;">You are getting it!</stream>
+        <br>
+        <br>
+        You successfully created your ({{ PROJ_ASSEMBLY }}) project!
+        <br>
+        <br>
+        The <stream style="font-weight: bold;">third step</stream> to take is: <stream style="text-decoration: underline overline;">upload</stream>
+        <br>
+        <br>
+        This is the page you will use to actually upload your VCF files and launch the analysis
+        <br>
+        Remember these VCF files must be annotated with a specific <a href="https://www.ensembl.org/info/docs/tools/vep/index.html" target="_blank">VEP</a> command in order to ensure reliability of the internal algorithm.
+        If you did not already, have a look <a href="{{ SERVER_ADDRESS }}/commandVEP" target="_blank">here</a> for the command documentation.
+        <br>
+        <br>
+        Once annotated you can upload your files just selecting them from the <stream style="color: blue;">Browse</stream> button at the bottom and then just click <stream style="color: blue;">Submit</stream>, once selected.
+        <br>
+        <br>
+        Once uploaded, you will see your files listed below. At this point you are ready for the <stream style="font-weight: bold;">fourth step</stream>: <stream style="text-decoration: underline overline;">analyze</stream>
+        <br>
+        <br>
+        We uploaded this first file for you. Just click on the green <stream style="color: blue;">analyze</stream> button on the right!
+      </div>
+    </div>
+
+
+
+    <div style="text-align: center; margin-top: 10%;">
+    <h1>Uploaded VCF</h1>
+    current project:
+    <a href="{{ url_for( 'main.project', username = current_user.server_username )}}">
+    <button class="btn btn-info">
+      {{ current_user.project_name }}
+    </button>
+    </a>
+
+    <div style="text-align: center; margin-top: 3%;">
+    <table class="table table-hover" >
+
+        <thead class="thead-dark">
+          <tr style="background-color: white; color: black; font-weight: bold;" >
+            <td>index</td>
+            <td>name</td>
+            <td>analyze</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for file in files %}
+          {% if ( file.endswith('.vcf') or file.endswith('.VCF') ) and not ( file.endswith('.FILTERED.vcf') or file.endswith('.FILTERED.VCF') ) %}
+          <tr style="background-color: white;" >
+              <td class="ui-helper-center" style="border: collapse;" >
+                  {{ loop.index }}
+              </td>
+              <td class="ui-helper-center" style="border: collapse;" >
+                  {{ file }}
+              </td>
+              <td class="ui-helper-center" style="border: collapse;" >
+                  <button type="button" class="btn btn-success" disabled>
+                    <a href="{{ url_for( 'main.filterVCF', filename=file ) }}" style="color: white;">
+                      analyze
+                    </a>
+                  </button>
+              </td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+
+    </table>
+    </div>
+    </div>
+
+
+    <div style="text-align: center; margin-top: 10%;">
+    <h1>VCF Upload</h1>
+    <form method="POST" action="{{ url_for('main.upload_files', filename=file) }}" enctype="multipart/form-data">
+        <input type="file" name="file" style="margin-left: 43%; margin-top: 2%;" disabled>
+        <input type="submit" value="Submit" style="margin-top: 2%;" id="mySubmit">
+    </form>
+    </div>
+
+
+
+  </body>
+
+
+</html>
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+{% endblock %}

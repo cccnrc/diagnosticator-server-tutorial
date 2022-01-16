@@ -1,0 +1,98 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+
+  div#external {
+    border: 0px solid #eee;
+    position: relative;
+    text-align: center;
+  }
+  div#external > ul {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    position: relative;
+  }
+  div#external:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    font-size: 150%;
+    border-bottom: 3px solid red;
+    border-top: 3px solid red;
+    padding: 2%;
+    text-align: center;
+  }
+  div#external > dl {
+    visibility: visible;
+    opacity: 1;
+    vertical-align: middle;
+  }
+  div#external:hover > dl {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .vertical-center {
+    margin: 0;
+    margin-left: -40%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    color: #D40000;
+    font-weight: normal;
+    font-size: 180%;
+    font-family: monospace;
+    max-width: 80%;
+    border: 0px solid blue;
+  }
+
+</style>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-TUTORIAL">
+  <div class="inner" style="color: black;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    This is the first step: <stream style="text-decoration: underline;">set up a project</stream>!
+    <br>
+    You can put whatever you wish as project name, description, etc.
+    <br>
+    <br>
+    We already uploaded and analyzed a file for you, so you're restricted to <stream style="color: red;">hg19</stream> here
+    <br>
+    But on the real application you will be free to select hg38 as well
+    <br>
+    <br>
+    Click on the <stream style="color: grey;">Submit</stream> button once done
+  </div>
+</div>
+
+
+
+
+    <!-- my addictions -->
+    <div style="" >
+    <div style="display: inline-block; float: right; " >
+    <div width="100%" style="text-align: right;" >
+        {{ current_user.username }}
+    </div>
+    </div>
+
+
+    <h1>Project:</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

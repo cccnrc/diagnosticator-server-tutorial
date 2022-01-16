@@ -1,0 +1,88 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<style>
+    .VS,.S,.M,.P {
+        background-color: #ff8f8f;
+    }
+    .BA,.BS,.BP {
+        background-color: #ccffa6;
+    }
+    .NA {
+        background-color: #ffffff;
+    }
+    .ui-helper-center {
+        text-align: center;
+    }
+</style>
+
+
+
+
+
+<table class="table table-hover" >
+
+    <thead class="thead-dark">
+      <tr style="background-color: white; color: black;" >
+        <th class="ui-helper-center" colspan="3">
+            variant: {{ variant_dict['var'] }}
+        </th>
+      </tr>
+    </thead>
+
+      <tbody>
+        {% for k_family, k_dict in variant_dict.items() %}
+
+        {% if k_family == "ACMG" %}
+
+        <!-- separator -->
+        {% if varACMG == 'P' or varACMG == 'LP' %}
+          {% set bg_overall = "red" %}
+        {% elif varACMG == 'B' or varACMG == 'LB' %}
+          {% set bg_overall = "green" %}
+        {% else %}
+          {% set bg_overall = "black" %}
+        {% endif %}
+        <tr style="background-color: {{ bg_overall }}; font-weight: bold; color: white;" >
+              <td class="ui-helper-center" style="border: collapse;" colspan="3" >
+                {{ k_family }} verdict: {{ varACMG }}
+              </td>
+          </tr>
+        <tr style="background-color: white; font-weight: bold; color: black;" >
+            <td class="ui-helper-center" style="border: collapse;" colspan="3" >
+              ACMG categories:
+            </td>
+        </tr>
+
+        {% for k, v in k_dict.items() %}
+
+          <tr class="{{ v }}">
+            <td class="ui-helper-center">
+              {{ k }}
+            </td>
+            <td class="ui-helper-center" style="font-weight: bold;">
+              {% if v != 'NA' %}
+                {{ v }}
+              {% endif %}
+            </td>
+            <td class="ui-helper-center">
+              <a target="_blank">
+                modify
+              </a>
+            </td>
+
+          </tr>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endfor %}
+      </<tbody>
+
+
+
+{% endblock %}

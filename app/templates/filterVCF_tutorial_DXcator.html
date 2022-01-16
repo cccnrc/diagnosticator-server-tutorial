@@ -1,0 +1,111 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+
+  div#external {
+    border: 0px solid #eee;
+    position: relative;
+    text-align: center;
+  }
+  div#external > ul {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    position: relative;
+  }
+  div#external:hover > ul {
+    visibility: visible;
+    opacity: 1;
+    font-size: 150%;
+    border-bottom: 3px solid red;
+    border-top: 3px solid red;
+    padding: 2%;
+    text-align: center;
+  }
+  div#external > dl {
+    visibility: visible;
+    opacity: 1;
+    vertical-align: middle;
+  }
+  div#external:hover > dl {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+  }
+
+  .vertical-center {
+    margin: 0;
+    margin-left: -40%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inline-block;
+    color: #D40000;
+    font-weight: normal;
+    font-size: 180%;
+    font-family: monospace;
+    max-width: 80%;
+    border: 0px solid blue;
+  }
+
+</style>
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-TUTORIAL">
+  <div class="inner" style="color: black;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    This is the crucial <stream style="color: #D40000; font-weight: bold;">filtering</stream> step
+    <br>
+    <br>
+    The whole point of Diagnosticator is helping you reducing the number of results to manually screen.
+    <br>
+    Help yourself further reducing it selecting a stringent Maximum  <stream style="text-decoration: underline;">Allele Frequency</stream>, Maximum <stream style="text-decoration: underline;">Allele Count</stream> and  <stream style="text-decoration: underline;">Variant Consequences</stream> to exclude.
+    <br>
+    You can find exhaustive documentation regarding those parameters <a href="{{ SERVER_ADDRESS }}/filtering" target="_blank">here</a>!
+    <br>
+    You also need a genelist file to specify the pool of genes you are interested in analyzing, you can find our Columbia Kidney genelist <a href="{{ SERVER_ADDRESS }}/download/kidney_acmg59.gl" target="_blank">here</a>!
+    You can also create your own based on that format
+    <br>
+    <br>
+    We already performed this step for you and your results are already generated, but take a look at the fields to start familiarizing with them
+    <br>
+    Once done, click on the <stream style="color: grey; text-decoration: underline;">Next</stream> button at the bottom of this page
+  </div>
+</div>
+
+
+
+    <!-- my addictions -->
+    <div style="" >
+    <div style="display: inline-block; float: right; " >
+    <div width="100%" style="text-align: right;" >
+        {{ current_user.username }}
+    </div>
+    </div>
+
+
+    <h1>Filters:</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+    <div style="font-size: 70%; font-color: grey;">
+      Full description <a target="_blank" href="https://m.ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a>
+      <br>
+      <br>Note: <a href="https://pubmed.ncbi.nlm.nih.gov/25741868/" target="_blank">ACMG</a> diagnostic variants are generally restricted to <stream style="text-decoration: underline;">HIGH or MODERATE</stream> consequences
+    </div>
+
+    <div style="margin-top: 10%;">
+      <a href="{{ url_for( 'main.patient_result' )}}">
+        <button class="btn btn-info" style="border: 1px solid #308eff;">Next</button>
+      </a>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,4 @@
+20	43255177	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=ADA;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-0;qual=NA;
+20	44047972	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=PIGT;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-1;qual=NA;
+20	17970587	.	A	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=MGME1;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-2;qual=NA;
+20	10627666	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=JAG1;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-4;qual=NA;

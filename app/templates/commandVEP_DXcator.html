@@ -1,0 +1,93 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+  #close:hover {
+      float:right;
+      display:inline-block;
+      padding:2px 5px;
+      background:#ccc;
+      color:#fff;
+  }
+  #close {
+    float:right;
+    display:inline-block;
+    padding:2px 5px;
+    background:#ccc;
+  }
+
+  pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-left: 3px solid #f36d33;
+      color: #666;
+      page-break-inside: avoid;
+      font-family: monospace;
+      font-size: 80%;
+      line-height: 1.6;
+      margin-bottom: 1.6em;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1em 1.5em;
+      display: block;
+      word-wrap: break-word;
+  }
+
+</style>
+
+
+<body style="text-align: center; vertical-align: middle;"
+
+  <div style="margin-top: 15%;">
+    <h1 style="font-weight: bold;" >VCF annotation</h1>
+  <div style="border: 0px solid blue; max-width: 100%; background-color: rgba(255, 0, 0, 0.3); " >
+    <span id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</span>
+    <div style="text-align: center; font-size: 150%; padding: 5%;" >
+      You need to have <a href="https://www.ensembl.org/info/docs/tools/vep/index.html" target="_blank">VEP</a> installed and running (local machine or cloud, you choose)
+      <br>
+      We tested version 103, you can install it through <a href="https://hub.docker.com/layers/ensemblorg/ensembl-vep/release_103/images/sha256-18573da036dc228b6be5ed8cfa6206e8d23b56e6fd792b080c8500c5c4e7c3cd?context=explore" target="_blank">Docker</a> just as you installed <a href="{{ SERVER_ADDRESS }}" target="_blank">Diagnosticator</a> ;)
+      <br>
+      <br>
+      You will also need <a href="https://sites.google.com/site/jpopgen/dbNSFP" target="_blank">dbSNFP</a>, <a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank">ClinVar</a>, <a href="http://www.liulab.science/dbscsnv.html" target="_blank">dbSCSNV</a>,and <a href="https://cadd.gs.washington.edu/" target="_blank">CADD</a> plugins: read the instructions <a href="https://m.ensembl.org/info/docs/tools/vep/script/vep_plugins.html" target="_blank">here</a>
+      <br>
+      <br>
+      Here the exact VEP command you need to run to annotate your VCF files, be sure to type it correctly:
+      <pre>
+        <div style="text-align: left; float: left; padding: 0%;">
+          ./vep -v \
+              --format vcf --vcf \
+              --everything \
+              --pick \
+              --input_file <stream style="color: orange;">&lt;your-VCF-file&gt;</stream> \
+              --plugin dbscSNV,<stream style="color: purple;">&lt;dbscSNV-file&gt;</stream> \
+              --plugin CADD,<stream style="color: purple;">&lt;CADD-SNV-file&gt;</stream>,<stream style="color: purple;">&lt;CADD-INDEL-file&gt;</stream> \
+              --custom <stream style="color: purple;">&lt;ClinVar-file&gt;</stream>,ClinVar,vcf,exact,0,CLNSIG,CLNREVSTAT,CLNDN,CLNDISDB \
+              --plugin dbNSFP,<stream style="color: purple;">&lt;dbNSFP-SNV-file&gt;</stream>,LRT_score,LRT_pred,GERP++_RS,MutationTaster_pred,MutationTaster_score,MutationAssessor_pred,MutationAssessor_score,FATHMM_score,FATHMM_pred,1000Gp3_AC,1000Gp3_AF,1000Gp3_AFR_AC,1000Gp3_AFR_AF,1000Gp3_EUR_AC,1000Gp3_EUR_AF,1000Gp3_AMR_AC,1000Gp3_AMR_AF,1000Gp3_EAS_AC,1000Gp3_EAS_AF,1000Gp3_SAS_AC,1000Gp3_SAS_AF,UK10K_AF,ESP6500_AA_AF,ESP6500_EA_AF,gnomAD_exomes_POPMAX_AF,gnomAD_exomes_POPMAX_nhomalt,gnomAD_genomes_POPMAX_AF,gnomAD_genomes_POPMAX_nhomalt,GTEx_V8_gene,GTEx_V8_tissue,Geuvadis_eQTL_target_gene,Polyphen2_HDIV_score,Polyphen2_HDIV_pred,Polyphen2_HVAR_score,Polyphen2_HVAR_pred,ExAC_AC,ExAC_AF,ExAC_Adj_AF,ExAC_AFR_AC,ExAC_AFR_AF,ExAC_AMR_AC,ExAC_AMR_AF,ExAC_EAS_AC,ExAC_EAS_AF,ExAC_FIN_AC,ExAC_FIN_AF,ExAC_NFE_AC,ExAC_NFE_AF,ExAC_SAS_AC,ExAC_SAS_AF,REVEL_score,REVEL_rankscore,clinvar_id,clinvar_clnsig,clinvar_trait,clinvar_review,clinvar_hgvs,clinvar_var_source,clinvar_MedGen_id,clinvar_OMIM_id,clinvar_Orphanet_id,CADD_phred,ExAC_Adj_AC,gnomAD_exomes_AN,gnomAD_exomes_AC,gnomAD_genomes_AN,gnomAD_genomes_AC,gnomAD_exomes_controls_AC,gnomAD_exomes_controls_AN,gnomAD_exomes_AFR_AF,gnomAD_exomes_AMR_AF,gnomAD_exomes_ASJ_AF,gnomAD_exomes_EAS_AF,gnomAD_exomes_FIN_AF,gnomAD_exomes_NFE_AF,gnomAD_exomes_SAS_AF,gnomAD_exomes_controls_AF,gnomAD_genomes_AFR_AF,gnomAD_genomes_AMR_AF,gnomAD_genomes_ASJ_AF,gnomAD_genomes_EAS_AF,gnomAD_genomes_FIN_AF,gnomAD_genomes_NFE_AF,genename \
+              -o <stream style="color: orange;">&lt;your-VCF-output-file&gt;</stream>
+        </div>
+      </pre>
+      Let us know if you have any problem with this!
+    </div>
+  </div>
+  </div>
+
+</body>
+
+
+
+
+<script>
+  window.onload = function(){
+      document.getElementById('close').onclick = function(){
+          this.parentNode.parentNode
+          .removeChild(this.parentNode);
+          return false;
+      };
+  };
+</script>
+
+
+
+
+{% endblock %}

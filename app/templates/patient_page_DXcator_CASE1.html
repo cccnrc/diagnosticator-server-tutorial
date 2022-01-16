@@ -1,0 +1,320 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
+
+<div class="fadeMe" id="outer-BEFORE">
+  <div class="inner" style="margin-top: 30%;">
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0') }}"><span id='close'>X</span></a>
+    Complete <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0') }}">CASE-0</a> annotation first!
+  </div>
+</div>
+
+<div class="fadeMe" id="outer-chr5_94833131_G_A">
+  <div class="inner" style="margin-top: 30%;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    Looks like we have a couple of variants flagged as Pathogenic in this sample,
+    <br>
+    Let's have a look at the first one!
+  </div>
+</div>
+
+<div class="fadeMe" id="outer-chr16_2149869_CAG_C">
+  <div class="inner" style="margin-top: 30%;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    Let's have a look at the second one now!
+  </div>
+</div>
+
+<div class="fadeMe" id="outer-chr16_2149869_CAG_C_STATUS">
+  <div class="inner" style="margin-top: 30%;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    Don't forget to accept the PKD1 variant!
+  </div>
+</div>
+
+<div class="fadeMe" id="outer-SAMPLE_STATUS">
+  <div class="inner" style="margin-top: 30%;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    Let's accept this patient as Diagnostic Finding as well!
+  </div>
+</div>
+
+
+<div class="fadeMe" id="outer-FINAL">
+  <div class="inner" style="margin-top: 30%;">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+    Great job! You made your second diagnosis!
+    <br>
+    <br>
+    Let's get back at the <a href="{{ url_for('main.patient_result') }}">Samples Main Page</a> to review another patient!
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="display: inline-block; float: right; " >
+  <a href="{{ url_for('main.patient_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      Samples Main Page
+    </button>
+  </a>
+  <a href="{{ url_for('main.gene_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff; ">
+      Gene Main Page
+    </button>
+  </a>
+</div>
+
+<div style='font-weight: bold; text-align: center; font-size: 120%; margin-top: 10%;'>
+  Sample:
+  <a href="{{ url_for('main.patient_page', sample_name = sample_name )}}">
+  <button class="btn btn-primary" style="">
+    {{ sample_name }}
+  </button>
+  </a>
+  Status:
+  {% set sample_status = 'NA' %}
+  {% if 'STATUS' in sample_dict %}
+    {% if 'status' in sample_dict['STATUS'] %}
+      {% set sample_status = sample_dict['STATUS']['status'] %}
+    {% endif %}
+  {% endif %}
+
+  {% if sample_status != 'NA' %}
+    <a href="{{ url_for('main.patient_page', sample_name = sample_name )}}">
+    <button class="btn btn-{{classes_dict[sample_dict['STATUS']['status']]['btn-class']}}" style="{{classes_dict[sample_dict['STATUS']['status']]['btn-style']}}">
+    {{ classes_dict[sample_status]['display'] }}
+    </button>
+    </a>
+  {% endif %}
+</div>
+
+
+
+<div style='font-weight: bold; text-align: center; font-size: 100%; margin-top: 3%;'>
+  <div>
+    Change Patient Status:
+  </div>
+    {% for c, c_dict in classes_dict.items() %}
+      <a class="box" id="{{ c_dict[ 'description' ] }}" href="{{ url_for( 'main.patient_change_status', sample_name = sample_name, new_status = c ) }}">
+        <button class="btn btn-{{c_dict['btn-class']}}" style="{{c_dict['btn-style']}}" id="{{ c_dict['display'] }}_SAMPLE_STATUS">
+          {{ c_dict['display'] }}
+        </button>
+      </a>
+    {% endfor %}
+    <!-- this is to show the button description -->
+    <div style='font-weight: normal; text-align: center; font-size: 100%; margin-top: 2%;'>
+    <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
+    <div id='testText' style='display: none; font-weight: bold; font-size: 120%'>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+
+<input type="hidden" id="TODO" name="TODO" value="{{ TODO }}">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div style='text-align: center; margin-top: 5%; max-width: 100%;'>
+  <stream style="font-size: 130%; font-weight: bold;">Patient Variants</stream>
+<table class="table table-hover" >
+
+    <thead class="thead-dark">
+      <tr style="background-color: black; color: white;" >
+        <th class="ui-helper-center">
+            index
+        </th>
+        <th class="ui-helper-center">
+            variant
+        </th>
+        <th class="ui-helper-center">
+            gene
+        </th>
+        <th class="ui-helper-center">
+            HGVSc
+        </th>
+        <th class="ui-helper-center">
+            HGVSp
+        </th>
+        <th class="ui-helper-center">
+            ACMG
+        </th>
+        <th class="ui-helper-center">
+            known
+        </th>
+      </tr>
+    </thead>
+
+      <tbody>
+        {% set var_status = 'NA' %}
+        {% for var_name, var_dict in sampleVar_dict.items() %}
+        {% if 'STATUS' in sample_dict %}
+          {% if var_name in sample_dict['STATUS'] %}
+            {% set var_status = sample_dict[ 'STATUS' ][ var_name ] %}
+          {% endif %}
+        {% endif %}
+        <tr class="{{ var_status }}">
+          <td class="ui-helper-center">
+              {{ loop.index }}
+          </td>
+          <td class="ui-helper-center">
+            <a href="{{ url_for('main.variant_page', variant_name = var_name ) }}" >
+              <button class="btn btn-info" style="border: 1px solid #308eff; width: 100%; white-space: normal;" id="{{ var_name }}_BUTTON">
+                <div style="word-wrap: break-word; overflow-wrap: break-word; width: 100%;">
+                  {{ var_name }}
+                </div>
+              </button>
+          </td>
+          <td class="ui-helper-center">
+            {% set GENENAME = sampleVar_dict[ var_name ][ 'CHARS' ][ 'genename' ] %}
+            {% if GENENAME == "" %}
+              {% set GENENAME = sampleVar_dict[ var_name ][ 'CHARS' ][ 'SYMBOL' ] %}
+            {% endif %}
+            <a href="{{ url_for('main.gene_page', gene_name = GENENAME) }}">
+              <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                {{ GENENAME }}
+              </button>
+            </a>
+          </td>
+          <td class="ui-helper-center">
+              {{ sampleVar_dict[ var_name ][ 'CHARS' ][ 'HGVSc' ] }}
+          </td>
+          <td class="ui-helper-center">
+              {{ sampleVar_dict[ var_name ][ 'CHARS' ][ 'HGVSp' ] }}
+          </td>
+          <td class="ui-helper-center">
+              {{ sampleVar_dict[ var_name ][ 'ACMG' ][ 'ACMG' ] }}
+          </td>
+          <td class="ui-helper-center">
+            {% if 'KNOWN' in sampleVar_dict[var_name] %}
+              {% if 'P' in sampleVar_dict[var_name]['KNOWN'] %}
+              <button class="btn btn-danger" style="color: black;" disabled>
+                P: {{ sampleVar_dict[ var_name ][ 'KNOWN' ][ 'P' ] }}
+              </button>
+              {% endif %}
+              {% if 'LP' in sampleVar_dict[var_name]['KNOWN'] %}
+              <button class="btn btn-danger" style="color: black; opacity: 0.8;" disabled>
+                LP: {{ sampleVar_dict[ var_name ][ 'KNOWN' ][ 'LP' ] }}
+              </button>
+                <br>
+              {% endif %}
+              {% if 'US' in sampleVar_dict[var_name]['KNOWN'] %}
+              <button class="btn btn-warning" style="color: black;" disabled>
+                US: {{ sampleVar_dict[ var_name ][ 'KNOWN' ][ 'US' ] }}
+              </button>
+              {% endif %}
+              {% if 'LB' in sampleVar_dict[var_name]['KNOWN'] %}
+              <button class="btn btn-success" style="color: black; opacity: 0.8;" disabled>
+                LB: {{ sampleVar_dict[ var_name ][ 'KNOWN' ][ 'LB' ] }}
+              </button>
+                <br>
+              {% endif %}
+              {% if 'B' in sampleVar_dict[var_name]['KNOWN'] %}
+              <button class="btn btn-success" style="color: black;" disabled>
+                B: {{ sampleVar_dict[ var_name ][ 'KNOWN' ][ 'B' ] }}
+              </button>
+                <br>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </<tbody>
+</div>
+
+
+
+<script>
+
+  var TODO_seen = document.getElementById("TODO").value;
+
+  if ( TODO_seen == "CASE0_page" || TODO_seen == "X_107866056_G_C_page" || TODO_seen == "X_107866056_G_C_status" || TODO_seen == "CASE0_status" ) {
+    document.getElementById('outer-chr5_94833131_G_A').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-SAMPLE_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('5-94833131-G-A_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else if ( TODO_seen == "CASE1_page" || TODO_seen == "chr5_94833131_G_A_page" ) {
+    document.getElementById('outer-BEFORE').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-SAMPLE_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('5-94833131-G-A_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else if ( TODO_seen == "chr16_2149869_CAG_C_page" || TODO_seen == "chr16_2149869_CAG_C_ACMG_page" ) {
+    document.getElementById('outer-BEFORE').setAttribute("style", "display: none");
+    document.getElementById('outer-chr5_94833131_G_A').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-SAMPLE_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('16-2149869-CAG-C_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else if ( TODO_seen == "chr16_2149869_CAG_C_status" ) {
+    document.getElementById('outer-BEFORE').setAttribute("style", "display: none");
+    document.getElementById('outer-chr5_94833131_G_A').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C').setAttribute("style", "display: none");
+    document.getElementById('outer-SAMPLE_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('16-2149869-CAG-C_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else if ( TODO_seen == "CASE1_status" ) {
+    document.getElementById('outer-BEFORE').setAttribute("style", "display: none");
+    document.getElementById('outer-chr5_94833131_G_A').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('DF_SAMPLE_STATUS').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else {
+    document.getElementById('outer-BEFORE').setAttribute("style", "display: none");
+    document.getElementById('outer-chr5_94833131_G_A').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C').setAttribute("style", "display: none");
+    document.getElementById('outer-chr16_2149869_CAG_C_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-SAMPLE_STATUS').setAttribute("style", "display: none");
+  };
+
+  $('.box').on('mouseover', function (e) {
+      $('#testText')[0].innerHTML = this.id;
+      $('#testText')[0].style.display = 'block';
+  });
+  $('.box').on('mouseout', function (e) {
+      $('#testText')[0].style.display = 'none';
+  });
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,10 @@
+6	32018046	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=TNXB;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-3;qual=NA;
+6	57055269	.	C	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=RAB23;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-3;qual=NA;
+6	7581641	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=DSP;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-0;qual=NA;
+6	49403302	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=MUT;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-0;qual=NA;
+6	52874250	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=ICK;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+6	161135860	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=PLG;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+6	161152257	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=PLG;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-3;qual=NA;
+6	42946271	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=PEX6;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+6	32017900	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=TNXB;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-4;qual=NA;
+6	32052313	.	C	T	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=TNXB;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-4;qual=NA;

@@ -1,0 +1,365 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<style>
+    .AC {
+        background-color: #ccffa6;
+    }
+    .AR {
+        background-color: #ebffdb;
+    }
+    .US {
+        background-color: #dbdbdb;
+    }
+    .RR {
+        background-color: #ffdede;
+    }
+    .RE {
+        background-color: #ffb0b0;
+    }
+    .SE {
+        background-color: #b8c8ff;
+    }
+    .SR {
+        background-color: #d9e1ff;
+    }
+    .IP {
+        background-color: #fffcd9;
+    }
+    .NA {
+        background-color: #ffffff;
+    }
+    .ui-helper-center {
+        text-align: center;
+    }
+
+    td {
+        word-wrap: break-word;         /* All browsers since IE 5.5+ */
+        overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+</style>
+
+
+<div style="display: inline-block; float: right; " >
+  <a href="{{ url_for('main.patient_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      Samples Main Page
+    </button>
+  </a>
+  <a href="{{ url_for('main.gene_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff; ">
+      Gene Main Page
+    </button>
+  </a>
+</div>
+
+
+
+<div style='font-weight: bold; text-align: center; font-size: 120%; margin-top: 10%;'>
+  Variant:
+  <a href="{{ url_for('main.variant_page', variant_name = variant_name )}}">
+  <button class="btn btn-primary" style="">
+    {{ variant_name }}
+  </button>
+  </a>
+</div>
+
+<div style='text-align: center; font-size: 100%; margin-top: 3%; max-width: 100%;'>
+<table class="table table-hover" >
+
+      <tbody>
+        {% for k_family, k_dict in variant_dict.items() %}
+
+        {% if k_family != "var" and k_family != "status" %}
+
+        {% if k_family == 'ACMG' %}
+        <!-- separator -->
+        <tr style="background-color: black; font-weight: bold; color: white;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              {{ k_family }}
+            </td>
+        </tr>
+        <tr style="background-color: white; color: grey;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              (click to manually modify)
+            </td>
+        </tr>
+
+        {% elif k_family == 'KNOWN' %}
+        <!-- separator -->
+        <tr style="background-color: black; font-weight: bold; color: white;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              {{ k_family }}
+            </td>
+        </tr>
+        <tr style="background-color: white; color: grey;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              (previous reports from other users)
+            </td>
+        </tr>
+
+        {% else %}
+        <!-- separator -->
+        <tr style="background-color: black; font-weight: bold; color: white;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              {{ k_family }}
+            </td>
+        </tr>
+        {% endif %}
+
+        {% for k, v in k_dict.items() %}
+
+        {% if v != 'NA' %}
+
+        {% set k_show = k %}
+        {% if k in abbreviations_dict.keys() %}
+          {% set k_show = abbreviations_dict[k] %}
+        {% endif %}
+
+        {% if k_family == 'SAMPLES' %}
+          <!-- this is to show the button description -->
+          <tr>
+            <td colspan="2">
+            <div style='font-weight: normal; text-align: center; font-size: 100%;'>
+            <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
+            <div id='testText' style='display: none; font-weight: bold; font-size: 120%'>
+            </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="ui-helper-center">
+            <a href="{{ url_for('main.patient_page', sample_name = k ) }}" >
+              <button class="btn btn-{{ classes_dict[ sampleVARstatus_dict[k] ]['btn-class'] }}" style="{{ classes_dict[ sampleVARstatus_dict[k] ]['btn-style'] }}" >
+                {{ k_show }}
+              </button>
+            </a>
+            <stream style="color: grey;">
+              ({{v}})
+            </stream>
+            </td>
+            <td class="ui-helper-center">
+                change sample variant status:<br>
+                {% for c, c_dict in classes_dict.items() %}
+                  <a class="box" id="{{ c_dict[ 'description' ] }}" href="{{ url_for( 'main.change_variant_sample_status', project_name = project_name, sample_name = k, variant_name = variant_name, new_status = c ) }}">
+                    <button onclick="serverConfirmation( sample_name = '{{ k }}', variant_name = '{{ variant_name }}', new_status = '{{ c }}' )" class="btn btn-{{c_dict['btn-class']}}" style="{{c_dict['btn-style']}}">
+                      {{ c_dict['display'] }}
+                    </button>
+                  </a>
+                {% endfor %}
+            </td>
+          </tr>
+
+        {% elif k_family == 'KNOWN' %}
+          <tr class="">
+            <td class="ui-helper-center" style="font-weight: bold;">
+              <button class="btn btn-{{ ACMG_classes_dict[ k ][ 'btn-class' ] }}" style="{{ ACMG_classes_dict[ k ][ 'btn-style' ] }}">
+                    {{ ACMG_classes_dict[ k ][ 'display' ] }}
+                </button>
+            </td>
+            <td class="ui-helper-center">
+                <button class="btn btn-{{ ACMG_classes_dict[ k ][ 'btn-class' ] }}" style="{{ ACMG_classes_dict[ k ][ 'btn-style' ] }}">
+                  {{ v }}
+                </button>
+            </td>
+          </tr>
+
+        {% elif k_family == 'ACMG' %}
+        <tr class="">
+          {% if k == 'ACMG' %}
+            <td class="ui-helper-center" style="font-weight: bold;">
+              <a href="{{ url_for('main.acmg_page', variant_name = variant_name ) }}">
+                <button class="btn btn-primary">
+                    {{ k_show }} overall
+                </button>
+              </a>
+            </td>
+            <td class="ui-helper-center">
+              <a href="{{ url_for('main.acmg_page', variant_name = variant_name ) }}">
+                <button class="btn btn-{{ ACMG_classes_dict[ v ][ 'btn-class' ] }}" style="{{ ACMG_classes_dict[ v ][ 'btn-style' ] }}">
+                  {{ ACMG_classes_dict[ v ][ 'display' ] }}
+                </button>
+              </a>
+            </td>
+          {% else %}
+          <td class="ui-helper-center">
+            <a href="{{ url_for('main.acmg_page', variant_name = variant_name ) }}">
+              <button class="btn btn-{{ ACMG_strength_dict[ k ][ 'btn-class' ] }}" style="{{ ACMG_strength_dict[ k ][ 'btn-style' ] }}">
+                {{ ACMG_strength_dict[ k ][ 'display' ] }}
+              </button>
+            </a>
+          </td>
+          <td class="ui-helper-center">
+            <a href="{{ url_for('main.acmg_page', variant_name = variant_name ) }}">
+              <button class="btn btn-{{ ACMG_subclass_dict[ v ][ 'btn-class' ] }}" style="{{ ACMG_subclass_dict[ v ][ 'btn-style' ] }}">
+                {{ ACMG_subclass_dict[ v ][ 'description' ] }}
+              </button>
+            </a>
+          </td>
+          {% endif %}
+        </tr>
+
+        {% elif k_family == 'CLINVAR' %}
+          {% if k == 'clinvar_id' %}
+              {% if LINKS_DICT['CLINVAR'] %}
+              <tr class="">
+                <tr class="">
+                  <td class="ui-helper-center" style="vertical-align: middle;">
+                    CLINVAR variant page
+                  </td>
+                  <td class="ui-helper-center">
+                    <a target="_blank" href="{{ LINKS_DICT[ 'CLINVAR' ] }}">
+                      <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                        CLINVAR variant page
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+              {% endif %}
+            {% else %}
+            <tr class="">
+              <tr class="">
+                <td class="ui-helper-center">
+                  {{ k_show }}
+                </td>
+                <td class="ui-helper-center">
+                  {{ v }}
+                </td>
+              </tr>
+          {% endif %}
+
+
+        {% else %}
+          <!-- this is for the rest of values-->
+          <tr class="">
+            <td class="ui-helper-center">
+              {{ k_show }}
+            </td>
+            <!-- if gene name put link to gene page -->
+            {% if k == 'genename' %}
+              <td class="ui-helper-center">
+                <a href="{{ url_for('main.gene_page', gene_name = v) }}">
+                  <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                    {{ v }}
+                  </button>
+                </a>
+              </td>
+            </tr>
+              {% if LINKS_DICT %}
+                {% if LINKS_DICT['OMIM'] %}
+                  <tr class="">
+                    <td class="ui-helper-center" style="vertical-align: middle;">
+                      OMIM gene page
+                    </td>
+                    <td class="ui-helper-center">
+                      <a target="_blank" href="{{ LINKS_DICT[ 'OMIM' ] }}">
+                        <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                          OMIM gene page
+                        </button>
+                      </a>
+                    </td>
+                {% endif %}
+                {% if LINKS_DICT['GNOMAD'] %}
+                  <tr class="">
+                    <td class="ui-helper-center" style="vertical-align: middle;">
+                      GNOMAD variant page
+                    </td>
+                    <td class="ui-helper-center">
+                      <a target="_blank" href="{{ LINKS_DICT[ 'GNOMAD' ] }}">
+                        <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                          GNOMAD variant page
+                        </button>
+                      </a>
+                    </td>
+                {% endif %}
+                {% if LINKS_DICT['DBSNP'] %}
+                  <tr class="">
+                    <td class="ui-helper-center" style="vertical-align: middle;">
+                      dbSNP search variant
+                    </td>
+                    <td class="ui-helper-center">
+                      <a target="_blank" href="{{ LINKS_DICT[ 'DBSNP' ] }}">
+                        <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                          dbSNP search
+                        </button>
+                      </a>
+                    </td>
+                {% endif %}
+                {% if LINKS_DICT['FRANKLIN'] %}
+                  <tr class="">
+                    <td class="ui-helper-center" style="vertical-align: middle;">
+                      Franklin interpretation
+                    </td>
+                    <td class="ui-helper-center">
+                      <a target="_blank" href="{{ LINKS_DICT[ 'FRANKLIN' ] }}">
+                        <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                          Franklin
+                        </button>
+                      </a>
+                    </td>
+                {% endif %}
+                {% if LINKS_DICT['VARSOME'] %}
+                  <tr class="">
+                    <td class="ui-helper-center" style="vertical-align: middle;">
+                      Varsome interpretation
+                    </td>
+                    <td class="ui-helper-center">
+                      <a target="_blank" href="{{ LINKS_DICT[ 'VARSOME' ] }}">
+                        <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                          Varsome
+                        </button>
+                      </a>
+                    </td>
+                {% endif %}
+
+
+              {% endif %}
+            {% else %}
+              <td class="ui-helper-center">
+                {{ v }}
+              </td>
+            {% endif %}
+          </tr>
+        {% endif %}
+        {% endif %}
+
+        {% endfor %}
+        {% endif %}
+
+        {% endfor %}
+      </tbody>
+</table>
+</div>
+
+
+<script>
+  $('.box').on('mouseover', function (e) {
+      $('#testText')[0].innerHTML = this.id;
+      $('#testText')[0].style.display = 'block';
+  });
+  $('.box').on('mouseout', function (e) {
+      $('#testText')[0].style.display = 'none';
+  });
+
+  function serverConfirmation( sample_name, variant_name, new_status ) {
+    var proceed = confirm("Report this variant?");
+    if (proceed) {
+      window.location.replace("{{ url_for('main.change_variant_sample_status', sample_name = sample_name, variant_name = variant_name, new_status = new_status ) }}");
+    } else {
+      window.location.replace("{{ url_for('main.change_variant_sample_status_local', sample_name = sample_name, variant_name = variant_name, new_status = new_status ) }}");
+    }
+  }
+</script>
+
+
+
+{% endblock %}

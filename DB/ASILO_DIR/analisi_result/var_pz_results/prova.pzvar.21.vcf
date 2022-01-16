@@ -1,0 +1,4 @@
+21	16337067	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=NRIP1;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-0;qual=NA;
+21	16337106	.	T	G	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=NRIP1;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+21	34926817	.	T	C	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SON;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CONTROL-2;qual=NA;
+21	34922656	.	G	A	.	.	ad_alt=0;ad_ref=0;denovo=NA;dp_bin=NA;father_dp_bin=NA;father_gt=NA;filter=NA;gene_name_correct=SON;gq=NA;gt=het;mother_dp_bin=NA;mother_gt=NA;perc_alt=NA;pz_name=CASE-1;qual=NA;

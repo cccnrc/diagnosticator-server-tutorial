@@ -1,0 +1,102 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<style>
+    .AC {
+        background-color: #ccffa6;
+    }
+    .AR {
+        background-color: #ebffdb;
+    }
+    .US {
+        background-color: #dbdbdb;
+    }
+    .RR {
+        background-color: #ffdede;
+    }
+    .RE {
+        background-color: #ffb0b0;
+    }
+    .SE {
+        background-color: #b8c8ff;
+    }
+    .SR {
+        background-color: #d9e1ff;
+    }
+    .IP {
+        background-color: #fffcd9;
+    }
+    .NA {
+        background-color: #ffffff;
+    }
+    .ui-helper-center {
+        text-align: center;
+    }
+</style>
+
+
+
+<div style="display: inline-block; float: right; " >
+  <a href="{{ url_for('main.patient_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      Samples Main Page
+    </button>
+  </a>
+  <a href="{{ url_for('main.gene_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff; ">
+      Gene Main Page
+    </button>
+  </a>
+</div>
+
+
+<div style="text-align: center; margin-top: 5%;">
+  <stream style="font-size: 130%; font-weight: bold;">Genes</stream>
+  <table class="table table-hover" >
+
+      <thead class="thead-dark">
+      <tr style="background-color: black; color: white;" >
+          <th class="ui-helper-center">
+              index
+          </th>
+          <th class="ui-helper-center">
+              ID
+          </th>
+          <th class="ui-helper-center">
+              P/LP variants
+          </th>
+          <th class="ui-helper-center">
+              tot variants
+          </th>
+        </thead>
+
+        <tbody>
+          {% for gene_name, gene_dict in geneHTMLdict.items() %}
+          <tr>
+            <td class="ui-helper-center">
+                {{ loop.index }}
+            </td>
+            <td class="ui-helper-center">
+              <a href="{{ url_for('main.gene_page', gene_name = gene_name ) }}" >
+                  <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                    {{ gene_name }}
+                  </button>
+              </a>
+            </td>
+            <td class="ui-helper-center">
+                {{ gene_dict['pN'] }}
+            </td>
+            <td class="ui-helper-center">
+                {{ gene_dict['varN'] }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+  </table>
+</div>
+
+
+{% endblock %}

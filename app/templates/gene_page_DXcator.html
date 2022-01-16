@@ -1,0 +1,111 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<style>
+    .AC {
+        background-color: #ccffa6;
+    }
+    .AR {
+        background-color: #ebffdb;
+    }
+    .US {
+        background-color: #dbdbdb;
+    }
+    .RR {
+        background-color: #ffdede;
+    }
+    .RE {
+        background-color: #ffb0b0;
+    }
+    .SE {
+        background-color: #b8c8ff;
+    }
+    .SR {
+        background-color: #d9e1ff;
+    }
+    .IP {
+        background-color: #fffcd9;
+    }
+    .NA {
+        background-color: #ffffff;
+    }
+    .ui-helper-center {
+        text-align: center;
+    }
+</style>
+
+
+<div style="display: inline-block; float: right; " >
+  <a href="{{ url_for('main.patient_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      Samples Main Page
+    </button>
+  </a>
+  <a href="{{ url_for('main.gene_result' )}}">
+    <button class="btn btn-info" style="border: 1px solid #308eff; ">
+      Gene Main Page
+    </button>
+  </a>
+</div>
+
+
+<div style='font-weight: bold; text-align: center; font-size: 120%; margin-top: 10%;'>
+  Gene:
+  <a href="{{ url_for('main.gene_page', gene_name = gene_name )}}">
+  <button class="btn btn-primary" style="">
+    {{ gene_name }}
+  </button>
+  </a>
+</div>
+
+
+<div style="text-align: center; margin-top: 3%;">
+  <stream style="font-size: 130%; font-weight: bold;">Gene Variants</stream>
+<table class="table table-hover"  >
+
+    <thead class="thead-dark">
+      <tr style="background-color: black; color: white;" >
+        <th class="ui-helper-center">
+            index
+        </th>
+        <th class="ui-helper-center">
+            variant
+        </th>
+        <th class="ui-helper-center">
+            samples
+        </th>
+      </tr>
+    </thead>
+
+      <tbody>
+        {% for var_name, var_samples in gene_dict['var'].items() %}
+        <tr class="">
+          <td class="ui-helper-center">
+              {{ loop.index }}
+          </td>
+          <td class="ui-helper-center">
+            <a href="{{ url_for( 'main.variant_page', variant_name = var_name ) }}">
+              <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                {{ var_name }}
+              </button>
+            </a>
+          </td>
+          <td class="ui-helper-center">
+            {% for sample in var_samples %}
+              <a href="{{ url_for( 'main.patient_page', sample_name = sample ) }}">
+                <button class="btn btn-basic" style="border: 1px solid #308eff;">
+                  {{ sample }}
+                </button>
+              </a>
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+</table>
+</div>
+
+
+{% endblock %}
