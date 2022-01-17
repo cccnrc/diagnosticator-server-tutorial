@@ -8,7 +8,6 @@ sudo vim /etc/nginx/conf.d/diagnosticator.conf      ### add domain in server_nam
 sudo service nginx reload
 
 ### install CERTBOT
-sudo yum install -y certbot python2-certbot-apache
 sudo certbot
 
 
@@ -21,16 +20,9 @@ sudo certbot
 #               NGINX to automatically serve it (in HTTP) as for "static"
 #       to renew just run: certbot renew
 
-### create the DIR to automatically serve outside
-mkdir /home/ec2-user/diagnosticator-server-AWS/letsencrypt-verification
-### NGINX automatic HTTPS redirect needs to be stopped
-sudo vim /etc/nginx/conf.d/diagnosticator.conf
-sudo service nginx reload
-### run certbot serving that DIR
-sudo certbot certonly --webroot -w /home/ec2-user/diagnosticator-server-AWS/letsencrypt-verification -d diagnosticator.com -d www.diagnosticator.com
 ### you get your certificates in:
-/etc/letsencrypt/live/diagnosticator.com/fullchain.pem
-/etc/letsencrypt/live/diagnosticator.com/privkey.pem
+/etc/letsencrypt/live/diagnosticator-tutorial.com/fullchain.pem
+/etc/letsencrypt/live/diagnosticator-tutorial.com/privkey.pem
 ### just add it to NGINX and restore HTTPS redirect
 sudo vim /etc/nginx/conf.d/diagnosticator.conf
 sudo service nginx reload
