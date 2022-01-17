@@ -54,16 +54,21 @@
 <div class="fadeMe" id="outer-VARIANT_DESCRIPTION">
   <div class="inner" style="margin-top: -25%;">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Looks like this variant has no previously report and is flagged as Pathogenic by Diagnosticator algorithm
+    This variant has no previously report and is flagged as <stream style="color: red;">Pathogenic</stream> by Diagnosticator algorithm
     <br>
-    But if we look at possible related phenotypes in <stream id="programming">OMIM gene page</stream> there is only an Autosomal Recessive one, and this variant is in heterozygous state in our sample (page bottom)
+    But if we look at possible related phenotypes in its <stream id="programming"><a href="https://www.omim.org/entry/614589" target="_blank">OMIM gene page</a></stream>
+    there is only an Autosomal Recessive one,
+    and this variant is in <stream style="color: grey;">heterozygous</stream> state in our sample (page bottom)
     <br>
-    This means that this variant can not be diagnostic for our sample and we have no other variant on this gene (as you can see from <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1 page</a>)
+    This means that this variant can not be diagnostic for our sample and we have no other variant on this gene
+    (as you can see from <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1</a> page)
     <br>
     We can then just ignore this variant, but if you want to keep track of it you can assign this variant a Negative (<stream id="programming">NE</stream>) status from this sample's row at the bottom of the page (as we did for <stream id="programming">DF</stream> in the previous example)
     <br>
     <br>
-    After you reviewed it, let's come back to <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1 page</a> to look for other possible results
+    After you reviewed it, let's come back to
+    <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1</a>
+    (page bottom) to look for other possible results
   </div>
 </div>
 

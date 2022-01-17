@@ -54,8 +54,10 @@
 
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
+
+
 <div class="fadeMe" id="outer-TUTORIAL">
-  <div class="inner" style="color: black;">
+  <div class="inner">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Welcome to <a href="https://diagnosticator-tutorial.com">Diagnosticator</a> online tutorial!
     <br>
@@ -68,6 +70,10 @@
     <br>
     <stream style="color: red; font-weight: bold;">Read carefully</stream> all the popups like this one that will open and guide you through the tutorial
     They are no more than 10 and will provide you the basics to understand Diagnosticator functioning and potential &#129299
+    <br>
+    <br>
+    <stream style="font-size: 80%; color: #b3b3b3;">(little trick: if you want to read one of these
+      message again after you close it, just <a href="">reload</a> the page)</stream>
     <br>
     <br>
     Let's get started <a href="{{ url_for('main.project') }}">here</a>!

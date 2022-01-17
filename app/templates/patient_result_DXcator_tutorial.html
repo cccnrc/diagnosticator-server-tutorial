@@ -84,9 +84,9 @@
 <div class="fadeMe" id="outer-CASE1">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Great job! You should see how <stream id="programming">CASE-0</stream> row is higlithed in green now!
+    Great job! You should see how <stream id="programming"><a href="{{ url_for('main.patient_page', sample_name = 'CASE-0' )}}">CASE-0</a></stream> row is higlithed in green now!
     <br>
-    Let's have a look at the second case: <stream id="programming">CASE-1</stream>
+    Let's have a look at the second case: <stream id="programming"><a href="{{ url_for('main.patient_page', sample_name = 'CASE-1' )}}">CASE-1</a></stream>
   </div>
 </div>
 
