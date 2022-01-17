@@ -1,10 +1,7 @@
 ### try to install a proper CA SSL certificate:
 
-### instal certbot: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html#letsencrypt
-sudo wget -r --no-parent -A 'epel-release-*.rpm' https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/
-sudo rpm -Uvh dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-*.rpm
-sudo yum-config-manager --enable epel*
-sudo yum repolist all
+### instal certbot: https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+sudo apt install certbot python3-certbot-nginx
 
 ### change NGINX
 sudo vim /etc/nginx/conf.d/diagnosticator.conf      ### add domain in server_name
