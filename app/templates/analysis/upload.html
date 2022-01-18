@@ -1,0 +1,87 @@
+{% extends "base_DXcator.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<html>
+  <head>
+    <title>File Upload</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+  </head>
+  <body>
+    <h1>VCF File Upload</h1>
+    <form action="{{ url_for('analysis.upload') }}" class="dropzone">
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+
+    <hr>
+    <div style="text-align: center;">
+      <button class="btn btn-success" onClick="window.location.reload();">Show Below</button>
+    </div>
+
+    <hr>
+    <div style='font-size: 100%; margin-top: 3%; max-width: 100%;'>
+    <table class="table table-hover" >
+      <thead class="thead-dark">
+        <tr style="background-color: black; color: white;" >
+          <th class="ui-helper-center">
+              Index
+          </th>
+          <th class="ui-helper-center">
+              File
+          </th>
+          <th class="ui-helper-center">
+              Size
+          </th>
+          <th class="ui-helper-center">
+              Expires in
+          </th>
+          <th class="ui-helper-center" style="width: 8%;">
+              Analyze
+          </th>
+          <th class="ui-helper-center" style="width: 5%;">
+              Download
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file, file_dict in FILE_CHARS_DICT.items() %}
+        <tr>
+          <td class="ui-helper-center">
+              {{ loop.index }}
+          </td>
+          <td class="ui-helper-center">
+              {{ file }}
+          </td>
+          <td class="ui-helper-center">
+              {{ file_dict['size_value'] }} ({{ file_dict['size_format']}})
+          </td>
+          <td class="ui-helper-center">
+            {{ file_dict['expiration'] }} (h)
+          </td>
+          <td class="ui-helper-center">
+            <a href="{{ url_for('analysis.uploads', filename = file )}}">
+              <button class="btn btn-success" id="{{ file }}_BUTTON_ANALYSIS" style="width: 100%; white-space: normal;">
+                go
+              </button>
+            </a>
+          </td>
+          <td class="ui-helper-center">
+            <a href="{{ url_for('analysis.uploads', filename = file )}}">
+              <button class="btn btn-info" id="{{ file }}_BUTTON_DOWNLOAD" style="border: 1px solid #308eff; width: 100%; white-space: normal;">
+                get
+              </button>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+  </body>
+</html>
+
+
+
+{% endblock %}

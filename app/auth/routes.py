@@ -32,6 +32,10 @@ def authenticate_on_server( ):
     form = InsertPasswordRequestForm()
     if form.validate_on_submit():
         if check_server_user( form.username.data, form.password.data ):
+            ### add the folder for the USER UPLOAD if not existing yet
+            USER_UPLOAD_FOLDER = os.path.join( current_app.config['UPLOAD_FOLDER'], 'VCF-ANALYSIS', form.username.data )
+            if not os.path.exists( USER_UPLOAD_FOLDER ):
+                os.mkdir( USER_UPLOAD_FOLDER )
             ### add the folder for the USER TUTORIAL if not existing yet
             USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], form.username.data )
             if not os.path.exists( USER_JSON_FOLDER ):

@@ -70,7 +70,18 @@
       - the <stream id="programming" style="color: white; background: #4C4C4C">tot variants</stream> column indicates the total number of variants identified for that sample
     </div>
     <br>
-    Let's have a look at the first case: <stream id="programming">CASE-0</stream>, close this window and click on its name
+    Let's have a look at the first case:
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    <br>
+    <br>
+      <div style="border: 0px solid red; height: 90px;">
+        <div style="border: 0px solid green; height: 60px; width: 600px; display: inline-block; margin-top: 2%;">
+          <stream style="font-size: 80%; color: #505050;">note: through the tutorial, pulsing buttons indicates where you have to click: like </stream>
+        </div>
+        <div style="border: 0px solid blue; height: 60px; width: 90px; display: inline-block;">
+          <button type="button" class="btn btn-info" style="  animation-name: increase; animation-duration: 2s; animation-iteration-count: infinite;">this</button>
+        </div>
+    </div>
   </div>
 </div>
 

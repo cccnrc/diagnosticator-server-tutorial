@@ -14,6 +14,7 @@ upload/*NO_SAMPLES
 upload/*.H
 upload/*.H-samples
 upload/*.FILTERED.vcf
+upload/VCF-ANALYSIS/*
 README-VCF.md
 README-DEVELOPMENT.md
 README-DEPLOY.md
@@ -21,6 +22,7 @@ README-APP_DEVELOPMENT.md
 README-AWS-DEPLOY.md
 README-CERTIFICATE.md
 README-AWS-DEPLOY-UBUNTU.md
+README-NEW-BRANCH.md
 docker.README.md
 docker-compose*
 .flaskenv
