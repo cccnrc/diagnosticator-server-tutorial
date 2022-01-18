@@ -33,7 +33,10 @@ def authenticate_on_server( ):
     if form.validate_on_submit():
         if check_server_user( form.username.data, form.password.data ):
             ### add the folder for the USER UPLOAD if not existing yet
-            USER_UPLOAD_FOLDER = os.path.join( current_app.config['UPLOAD_FOLDER'], 'VCF-ANALYSIS', form.username.data )
+            VCF_ANALYSIS_FOLDER = os.path.join( current_app.config['UPLOAD_FOLDER'], 'VCF-ANALYSIS')
+            USER_UPLOAD_FOLDER = os.path.join( VCF_ANALYSIS_FOLDER, form.username.data )
+            if not os.path.exists( VCF_ANALYSIS_FOLDER ):
+                os.mkdir( VCF_ANALYSIS_FOLDER )
             if not os.path.exists( USER_UPLOAD_FOLDER ):
                 os.mkdir( USER_UPLOAD_FOLDER )
             ### add the folder for the USER TUTORIAL if not existing yet
