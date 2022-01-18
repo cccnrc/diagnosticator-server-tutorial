@@ -26,11 +26,13 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-CASE0">
-  <div class="inner" style="width: 90%;">
+  <div class="inner" style="width: 90%; color:black;">
     <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
       <div style="text-align: left;">
+        <stream style="color: white;">
         Hi <stream style="font-weight: bold;">{{ current_user.server_username }}</stream>,
         this is how our team found it most useful to flag variants and samples:
+        </stream>
         <br>
         <ul>
           <li>
@@ -62,8 +64,10 @@
       </ul>
 
       <br>
+      <stream style="color: white;">
       You will also find the same values but in <stream style="font-weight: bold;">Temporary</stream> status (paler color),
       we normally use them when we want to come back to the variant/sample in a future moment:
+      </stream>
       <br>
       <ul style="background-color: #7abdff">
         <li style="background-color: #e6f2ff">
@@ -93,6 +97,7 @@
         </li>
       </ul>
 
+      <div style="color: white;">
       <br>
       You also have a way to <stream style="font-weight: bold;">Restore</stream> initial status (no flag) if you changed your mind:
       <stream class="button-example" style="color: black; background-color: white;">restore</stream>
@@ -102,6 +107,7 @@
       This is how we imagined and used it, but if you have any better idea
       <stream style="text-decoration: underline;">please share it</stream> with us, so we can evaluate togheter
       how to improve it! &#128536
+      </div>
       </div>
   </div>
 </div>

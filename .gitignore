@@ -1,6 +1,7 @@
 venv
 DB/app.db
 JSON/enrico0
+JSON/enrico1
 TIME-ANALYSIS
 logs
 migrations

@@ -54,22 +54,31 @@
 
 
 <div class="fadeMe" id="outer-VARIANT_DESCRIPTION">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Looks like this variant is Pathogenic, but it's located in a gene that has no kidney phenotype (see OMIM page)
     <br>
     On the other hand, this is a gene in which any possible Diagnostic Finding should be reported, even if not related to the patient phenotype!
     <br>
-    Have a look at the <a href="https://www.ncbi.nlm.nih.gov/clinvar/docs/acmg" target="_blank">59 genes</a> for which ACMG recommends reporting incidental findings!
+    Have a look at the
+    <a href="https://www.ncbi.nlm.nih.gov/clinvar/docs/acmg" target="_blank">
+      <button class="btn btn-light" style="color: black;">59 genes</button>
+    </a> for which ACMG recommends reporting incidental findings!
     <br>
     <br>
     We don't want to lose this result, but you might want to differentiate it from Diagnostic Finding:
-     let's accept this variant as Secondary Finding (SF) for this patient and you'll see the color difference with CASE-0 and CASE-1
+    <br>
+    let's accept this variant as
+    <button class="btn btn-primary">Secondary Finding</button>
+    (SF) for this patient and you'll see the color difference with
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    and
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
   </div>
 </div>
 
 <div class="fadeMe" id="outer-chr13_32971124_CTG_C_STATUS">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Well done! Secondary finding diagnosis done! Let's come back to sample main page.
   </div>

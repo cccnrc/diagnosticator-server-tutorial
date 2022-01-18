@@ -43,6 +43,7 @@ class User( UserMixin, db.Model ):
     X_107866056_G_C_status = db.Column(db.Boolean, default=False)
     CASE0_status = db.Column(db.Boolean, default=False)
     CASE1_status = db.Column(db.Boolean, default=False)
+    CASE2_status = db.Column(db.Boolean, default=False)
     CASE3_status = db.Column(db.Boolean, default=False)
     CONTROL0_status = db.Column(db.Boolean, default=False)
     chr5_94833131_G_A_page = db.Column(db.Boolean, default=False)

@@ -53,7 +53,7 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-VARIANT_DESCRIPTION">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     This variant has no previously report and is flagged as Pathogenic by Diagnosticator algorithm
     <br>
@@ -62,23 +62,32 @@
     Looks like we have another diagnosis here!
     <br>
     <br>
-    Let's look at other interpretations (Franklin/Varsome). We see that Diagnosticator called a <stream id="programming">PP3</stream> criteria that they do not call.
-    As explained before, this might be related to little differences on how specific criteria are called, if we want to remove this from Diagnosticator we can act on this variant <stream id="programming">ACMG</stream> page
+    Let's look at other interpretations (Franklin/Varsome). We see that Diagnosticator called a
+    <stream style="text-decoration: underline;">PP3</stream> criteria that they do not call.
+    <br>
+    As explained before, this might be related to little differences on how specific criteria are called,
+    if we want to remove this from Diagnosticator we can act on this variant ACMG page
     <br>
     <br>
-    Let's click on the <a href="{{ url_for( 'main.acmg_page', variant_name = '16-2149869-CAG-C') }}">ACMG overall</a> blue button below!
+    Let's click on the
+    <a href="{{ url_for( 'main.acmg_page', variant_name = '16-2149869-CAG-C') }}">
+      <button class="btn btn-primary">ACMG overall</button>
+    </a>
+    button below!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-chr16_2149869_CAG_C_ACMG">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Great job! Let's accept this variant as Positive Diagnostic finding for this patient!
+    Great job! Let's accept this variant as
+    <button class="btn btn-success">Positive Diagnostic Finding</button>
+    for this patient!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-chr16_2149869_CAG_C_STATUS">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Well done! Second diagnosis done! Let's come back to sample main page.
   </div>

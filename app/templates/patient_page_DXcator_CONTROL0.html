@@ -6,23 +6,29 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-INTRO">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Looks like we don't have any interesting variant here...let's just flag this sample as Negative (for diagnostic finding)
+    Looks like we don't have any interesting variant here...let's just flag this sample as
+    <button class="btn btn-danger">Negative</button>
+    (for diagnostic finding)
     <br>
-    Then get back at the <a href="{{ url_for('main.patient_result') }}">Samples Main Page</a>
+    Then get back at the <a href="{{ url_for('main.patient_result') }}">
+      <button class="btn btn-info">Samples Main Page</button>
+    </a>
   </div>
 </div>
 
 <div class="fadeMe" id="outer-FINAL">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Excellent! Let's get back at the <a href="{{ url_for('main.patient_result') }}">Samples Main Page</a> to review another patient!
+    Excellent! Let's get back at the <a href="{{ url_for('main.patient_result') }}">
+      <button class="btn btn-info">Samples Main Page</button>
+    </a> to review another patient!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-BEFORE">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
     Complete <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0') }}">CASE-0</a> and <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1') }}">CASE-1</a> and <a href="{{ url_for('main.patient_page', sample_name = 'CASE-3') }}">CASE-3</a> annotation first!
   </div>

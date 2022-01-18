@@ -6,39 +6,47 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-chr13_32971124_CTG_C">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Let's have a look at the first variant!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-chr13_32971124_CTG_C_STATUS">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Don't forget to accept the BRCA2 variant as Secondary Finding!
+    Don't forget to accept the BRCA2 variant as
+    <button class="btn btn-primary">Secondary Finding</button>!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-SAMPLE_STATUS">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Let's flag this patient status as Secondary Finding!
+    Let's flag this patient status as
+    <button class="btn btn-primary">Secondary Finding</button>
+    as well!
   </div>
 </div>
 
 
 <div class="fadeMe" id="outer-FINAL">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Great job! You made your first Secondary Finding diagnosis!
+    Great job! You made your first
+    <button class="btn btn-primary">Secondary Finding</button>
+    diagnosis!
     <br>
     <br>
-    Let's get back at the <a href="{{ url_for('main.patient_result') }}">Samples Main Page</a> to review another patient!
+    Let's get back at the
+    <a href="{{ url_for('main.patient_result') }}">
+      <button class="btn btn-info">Samples Main Page</button>
+    </a> to review another patient!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-BEFORE">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
     Complete <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0') }}">CASE-0</a> and <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0') }}">CASE-1</a> annotation first!
   </div>

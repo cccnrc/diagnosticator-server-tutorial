@@ -88,44 +88,64 @@
 <div class="fadeMe" id="outer-CASE0_STATUS">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Don't forget to flag <stream id="programming">CASE-0</stream> as Diagnostic Finding!
+    Don't forget to flag
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    as Diagnostic Finding!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-CASE1">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Great job! You should see how <stream id="programming"><a href="{{ url_for('main.patient_page', sample_name = 'CASE-0' )}}">CASE-0</a></stream> row is higlithed in green now!
+    Great job! You should see how
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    row is higlithed in green now!
     <br>
-    Let's have a look at the second case: <stream id="programming"><a href="{{ url_for('main.patient_page', sample_name = 'CASE-1' )}}">CASE-1</a></stream>
+    Let's have a look at the second case:
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
   </div>
 </div>
 
 <div class="fadeMe" id="outer-CASE1_STATUS">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Don't forget to flag <stream id="programming">CASE-1</stream> as Diagnostic Finding!
+    Don't forget to flag
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
+    as Diagnostic Finding!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-CASE3">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Let's skip <stream id="programming">CASE-2</stream> for the moment and have a look at: <stream id="programming">CASE-3</stream>
+    Let's skip
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-2')}}"><button class="btn btn-info">CASE-2</button></a>
+    for the moment (in which you can see the TTC37 variant
+    <br>
+    you previously flagged as
+    <button class="btn btn-success" style="opacity: 0.7;">Diagnostic Finding (temporary)</button>
+    if you open the page &#128526)
+    <br>
+    <br>
+    Have a look at:
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-3')}}"><button class="btn btn-info">CASE-3</button></a>
   </div>
 </div>
 
 <div class="fadeMe" id="outer-CASE3_STATUS">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Don't forget to flag <stream id="programming">CASE-3</stream> as Diagnostic Finding!
+    Don't forget to flag
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-3')}}"><button class="btn btn-info">CASE-3</button></a>
+    as Diagnostic Finding!
   </div>
 </div>
 
 <div class="fadeMe" id="outer-CONTROL0">
   <div class="inner" >
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Let's review a control now: <stream id="programming">CONTROL-0</stream>
+    Let's review a control now:
+    <a href="{{ url_for('main.patient_page', sample_name = 'CONTROL-0')}}"><button class="btn btn-info">CONTROL-0</button></a>
   </div>
 </div>
 
@@ -140,7 +160,13 @@
 <div class="fadeMe" id="outer-FINAL">
   <div class="inner" style="width: 80%;">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Such a great job, 2 diagnostic findings, 1 secondary finding and 1 negative sample are reviewed!
+    Such a great job, 2
+    <button class="btn btn-success">Diagnostic Findings</button>,
+    1
+    <button class="btn btn-primary">Secondary Findings</button>
+    and 1
+    <button class="btn btn-danger">Negative</button>
+    sample are reviewed!
     <br>
     This guided tutorial is completed now!
     <br>
@@ -156,12 +182,17 @@
     This is intended to keep you constantly updated about possible changes in your variants interpretation
     and review them if something else comes out!
     <br>
-    Try it clicking <a href="{{ url_for( 'main.fake_message' ) }}" target="_blank">here</a>
+    Try it clicking <a href="{{ url_for( 'main.fake_message' ) }}" target="_blank">
+      <button class="btn btn-info">here</button>
+    </a>
     <br>
     <br>
     See you on the <a href="https://diagnosticator.com" target="_blank">application</a> with your VCF files &#128536
     <br>
-    <stream style="font-size: 70%;">PS: to avoid display this message again just <a href="{{ url_for( 'main.tutorial_completed' ) }}">click here</a></stream>
+    <stream style="font-size: 70%;">PS: to avoid display this message again just
+      <a href="{{ url_for( 'main.tutorial_completed' ) }}">
+        <button class="btn btn-light" style="color: black;">click here</button>
+      </a></stream>
   </div>
 </div>
 

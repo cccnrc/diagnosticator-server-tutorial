@@ -46,7 +46,7 @@ def authenticate_on_server( ):
                 shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'var_dict.json'), USER_JSON_FOLDER )
                 shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'sample_dict.json'), USER_JSON_FOLDER )
                 shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'gene_dict.json'), USER_JSON_FOLDER )
-                flash( 'copied tutorial files in your folder!', 'success' )
+                # flash( 'copied tutorial files in your folder!', 'success' )
             return redirect( next )
     text_dict = ({
             'title' : 'Authenticate on Central Website',

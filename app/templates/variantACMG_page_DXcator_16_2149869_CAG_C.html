@@ -23,15 +23,21 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-chr16_2149869_CAG_C_ACMG_page_seen">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     From this page you can play with this variant ACMG criteria, adding/removing them, change their strenght etc.
     <br>
-    If you hover the mouse on the criteria abbreviation on the left it will show you the description on the top of the screen, just below <stream id="programming">Button description</stream>.
-    You can remove them through <stream id="programming">restore</stream> button
+    If you hover the mouse on the criteria abbreviation on the left it
+    will show you the description on the top of the screen, just below
+    <stream style="text-decoration: underline;">Button description</stream>.
+    You can remove them through <button class="btn btn-light;" style="color: black;">restore</button> button
     <br>
     <br>
-    Once you're done, just click on the variant name at the top of the page to come back to this variant page!
+    Once you're done, just click on the variant name
+    <a href="{{ url_for( 'main.variant_page', variant_name = '16-2149869-CAG-C') }}">
+      <button class="btn btn-primary">16-2149869-CAG-C</button>
+    </a>
+  at the top of the page to come back to this variant page!
   </div>
 </div>
 

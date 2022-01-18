@@ -52,39 +52,117 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-VARIANT_DESCRIPTION">
-  <div class="inner" style="margin-top: -25%;">
+  <div class="inner" style="width: 80%;">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     This variant has no previously report and is flagged as <stream style="color: red;">Pathogenic</stream> by Diagnosticator algorithm
     <br>
-    But if we look at possible related phenotypes in its <stream id="programming"><a href="https://www.omim.org/entry/614589" target="_blank">OMIM gene page</a></stream>
-    there is only an Autosomal Recessive one,
-    and this variant is in <stream style="color: grey;">heterozygous</stream> state in our sample (page bottom)
-    <br>
-    This means that this variant can not be diagnostic for our sample and we have no other variant on this gene
-    (as you can see from <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1</a> page)
-    <br>
-    We can then just ignore this variant, but if you want to keep track of it you can assign this variant a Negative (<stream id="programming">NE</stream>) status from this sample's row at the bottom of the page (as we did for <stream id="programming">DF</stream> in the previous example)
+    But if we look at possible related phenotypes in its
+    <a href="https://www.omim.org/clinicalSynopsis/222470" target="_blank">
+      <button class="btn btn-info">OMIM Gene</button>
+    </a>
+    there is only an Autosomal Recessive one.
     <br>
     <br>
-    After you reviewed it, let's come back to
-    <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1') }}" target="_blank">CASE-1</a>
-    (page bottom) to look for other possible results
+    There are 2 different samples carrying this variant, as you can see from the bottom of this page:
+    <div class="list">
+      - <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>:
+      <stream style="font-size: 120%; color: #808080;">heterozygous</stream>, <stream style="color: #bf9494;">cannot</stream> be diagnostic for an AR disorder
+    </div>
+    <div class="list" style="margin-top: 0.5%;">
+      - <a href="{{ url_for('main.patient_page', sample_name = 'CASE-2')}}"><button class="btn btn-info">CASE-2</button></a>:
+      <stream style="font-size: 120%; color: #808080;">homozygous</stream>, <stream style="color: #C7EA46;">can</stream> be diagnostic for an AR disorder
+    </div>
+    <br>
+    Thus:
+    <div class="list">
+      - <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>:
+      we could just ignore it for
+      , but let's keep track of this and flag it as
+      <button class="btn btn-danger">Negative</button>
+      (for Diagnostic Finding) in this sample
+    </div>
+    <div class="list" style="margin-top: 0.5%;">
+      - <a href="{{ url_for('main.patient_page', sample_name = 'CASE-2')}}"><button class="btn btn-info">CASE-2</button></a>:
+      it could be diagnostic for this sample, but let's have a look
+      at the associated phenotypes characteristics:
+      <a href="https://www.omim.org/clinicalSynopsis/222470" target="_blank">
+        <button class="btn btn-info">click</button>
+      </a>
+      <br>
+      <br>
+    </div>
+    We can see that this <a href="https://www.omim.org/clinicalSynopsis/222470" target="_blank"><stream style="color: #808080;">Trichoepatoenteric Syndrome</stream></a>
+    can have some kidney manifestation
+    (<a href="https://www.omim.org/clinicalSynopsis/222470" target="_blank"><stream style="color: #808080;">cortical microcysts</stream></a>)
+    but we don't know if this actually matches our patient phenotype.
+    <br>
+    We'll have to review and
+    come back to make a final decision. No problem!  &#128526
+    <br>
+    We can flag this variant as:
+    <button class="btn btn-success" style="opacity: 0.7;">Diagnostic Finding (temporary)</button>
+    <br>
+    <br>
+    Lets's start with this! Click the (pulsing) <button class="btn btn-success" style="opacity: 0.7;">Dr</button>
+    button right to
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-2')}}"><button class="btn btn-info">CASE-2</button></a>
+    at the bottom of this page!
   </div>
 </div>
 
 
 
 <div class="fadeMe" id="outer-chr5_94833131_G_A_STATUS">
-  <div class="inner" style="margin-top: 30%;">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-      Don't forget to flag this variant as Negative (for diagnostic finding)!
+      Don't forget to flag this variant as
+      <button class="btn btn-danger">Negative</button>
+      (diagnostic finding) for
+      <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
   </div>
 </div>
 
-<div class="fadeMe" id="outer-FINAL">
-  <div class="inner" style="margin-top: 30%;">
+<div class="fadeMe" id="outer-CASE2_STATUS">
+  <div class="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-      Great! Let's come back to <a href="{{ url_for( 'main.patient_page', sample_name = 'CASE-1' )}}">CASE-1</a> page!
+      Great!
+      This will remember us that we already looked at that variant
+      but we missed a piece of puzzle to make a decision.
+      Once we finished collecting all pieces, we'll come back and operate a finale decision.
+      <br>
+      <stream style="font-size: 80%; color: #696969">
+        (full description of different flags can be found
+        <a href="{{ url_for('main.status_explanation')}}" target="_blank">
+          <button class="btn btn-light">here</button>
+        </a>)
+      </stream>
+      <br>
+      <br>
+      As you can see nothing has changed for
+      <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
+      at the moment.
+      <br>
+      <br>
+      This design allows you to independently decide variant state in multiple samples,
+      see what samples you already flagged, and navigate variant characteristics
+      from the same <stream style="color: red; font-weight: bold;">single page</stream>! &#128526
+      <br>
+      <br>
+      Let's flag this variant
+      <button class="btn btn-danger">Negative</button>
+      (Diagnostic Finding) for
+      <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
+      now!
+  </div>
+</div>
+
+
+<div class="fadeMe" id="outer-FINAL">
+  <div class="inner" style="">
+    <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
+      Great! Let's come back to
+      <a href="{{ url_for('main.patient_page', sample_name = 'CASE-1')}}"><button class="btn btn-info">CASE-1</button></a>
+      page!
   </div>
 </div>
 
@@ -435,14 +513,23 @@
 
   var TODO_seen = document.getElementById("TODO").value;
 
-  if ( TODO_seen == "CASE0_page" || TODO_seen == "X_107866056_G_C_page" || TODO_seen == "X_107866056_G_C_status" || TODO_seen == "CASE1_page" || TODO_seen == "chr5_94833131_G_A_page" || TODO_seen == "chr5_94833131_G_A_status" ) {
+  if ( TODO_seen == "CASE0_page" || TODO_seen == "X_107866056_G_C_page" || TODO_seen == "X_107866056_G_C_status" || TODO_seen == "CASE1_page" || TODO_seen == "chr5_94833131_G_A_page" || TODO_seen == "CASE2_status" ) {
     document.getElementById('outer-chr5_94833131_G_A_STATUS').setAttribute("style", "display: none;" );
     document.getElementById('outer-FINAL').setAttribute("style", "display: none;" );
+    document.getElementById('outer-CASE2_STATUS').setAttribute("style", "display: none;" );
+    document.getElementById('CASE-2_Dr_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
+  }
+  else if ( TODO_seen == "chr5_94833131_G_A_status" ) {
+    document.getElementById('outer-chr5_94833131_G_A_STATUS').setAttribute("style", "display: none;" );
+    document.getElementById('outer-VARIANT_DESCRIPTION').setAttribute("style", "display: none");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
     document.getElementById('CASE-1_NE_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
   }
   else {
     document.getElementById('outer-chr5_94833131_G_A_STATUS').setAttribute("style", "display: none;" );
     document.getElementById('outer-VARIANT_DESCRIPTION').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE2_STATUS').setAttribute("style", "display: none;" );
+    document.getElementById('CASE-1_NE_BUTTON').setAttribute("style", "animation-name: increasered; animation-duration: 1s; animation-iteration-count: infinite;" );
   };
 
 

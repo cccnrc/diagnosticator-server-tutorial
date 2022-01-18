@@ -18,8 +18,9 @@
     padding: 0.5%;
   }
   ul {
-    background: #dedede;
+    background: black;
     padding: 1%;
+    border: 0px solid red;
   }
 </style>
 
@@ -27,11 +28,13 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-CASE0">
-  <div class="inner" style="width: 90%;">
+  <div class="inner" style="width: 90%; color: black;">
     <a href="{{ url_for('main.patient_result') }}"><span id='close'>X</span></a>
     <div style="text-align: left;">
+      <stream style="color: white;">
       Hi <stream style="font-weight: bold;">{{ current_user.server_username }}</stream>,
       here the expected results for the samples in this tutorial:
+      </stream>
       <ul>
         <li>
           <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0' )}}" target="_blank">
@@ -104,7 +107,9 @@
           no P/LP variant
         </li>
       </ul>
+      <stream style="color: white;">
       Don't worry if you missed something, you will get better practicing with your real-life variants &#128526
+      </stream>
     </div>
   </div>
 </div>

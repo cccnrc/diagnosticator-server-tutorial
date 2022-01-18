@@ -350,6 +350,7 @@ TUTORIAL_ORDER = ([
     "CASE0_status",
     "CASE1_page",
     "chr5_94833131_G_A_page",
+    "CASE2_status",
     "chr5_94833131_G_A_status",
     "chr16_2149869_CAG_C_page",
     "chr16_2149869_CAG_C_ACMG_page",
@@ -580,6 +581,7 @@ def variant_page( variant_name ):
         if not getattr( current_user, STEP ):
             TODO = STEP
             break
+    #flash(TODO, 'success')
     try:
         return( render_template( HTML_PAGE,
                                         title = variant_name,
@@ -618,6 +620,9 @@ def change_variant_sample_status( sample_name, variant_name, new_status ):
         db.session.commit()
     if variant_name == "5-94833131-G-A" and sample_name == "CASE-1" and new_status == "RE" :
         current_user.chr5_94833131_G_A_status = True
+        db.session.commit()
+    if variant_name == "5-94833131-G-A" and sample_name == "CASE-2" and new_status == "AR" :
+        current_user.CASE2_status = True
         db.session.commit()
     if variant_name == "16-2149869-CAG-C" and sample_name == "CASE-1" and new_status == "AC" :
         current_user.chr16_2149869_CAG_C_status = True

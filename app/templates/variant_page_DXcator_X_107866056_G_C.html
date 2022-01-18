@@ -52,9 +52,13 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 <div class="fadeMe" id="outer-FINAL">
-  <div class="inner" style="margin-top: -25%;"  id="inner-X_107866056_G_C_STATUS">
+  <div class="inner" style=""  id="inner-X_107866056_G_C_STATUS">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
-    Great job, you can see how the background color for sample (<stream id="programming">CASE-0</stream>) changed to <stream id="red-text" style="color: white; background-color: #00cc00; padding: 0.2%; border-radius: 8px; border: 0.5px solid white;">green</stream>, indicating that you accepted this specific variant as a Diagnostic Finding in that sample
+    Great job, you can see how the background color for sample
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    changed to
+    <button class="btn btn-success">green</button>,
+    indicating that you accepted this specific variant as a Diagnostic Finding in that sample
     <br>
     <br>
     The advantage of using such way of presenting results is that if more than one sample
@@ -69,32 +73,86 @@
     in different samples &#128526
     <br>
     <br>
-    Let's come back to <stream id="programming">CASE-0</stream> <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0' )}}">page</a> to change its status as well!
+    Let's come back to
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    to change its status as well!
+    <br>
+    <br>
+    <stream style="color: grey; font-size: 80%;">
+      PS: to come back to the sample page you have to click on its name
+      at the bottom of this page.
+      <br>
+      We know this is not perfect, but it is
+      necessary to allow you managing all samples from the same variant page
+      (you'll see this in a second in the next example)
+      <br>
+      This is how we imagined and used it, but if you have any better idea
+      <stream style="text-decoration: underline;">please share it</stream> with us, so we can evaluate togheter
+      how to improve it! &#128536
+    </stream>
   </div>
 </div>
 
 
 
 <div class="fadeMe" id="outer-VARIANT_DESCRIPTION">
-  <div class="inner" style="margin-top: -25%; width: 80%;">
+  <div class="inner" style="width: 80%;">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     This is the page in which you see a specific variant characteristics
     <br>
-    As you can see there is no value for <stream id="programming">Allele Frequency (AF)</stream>: it means that this variant is ABSENT in all screened DBs (AF section)
+    As you can see there is no value for
+    <button class="btn btn-primary" style="color: black;">Allele Frequency</button>:
+    it means that this variant is ABSENT in all screened DBs (AF section)
     <br>
-    In fact, if you check the <stream id="programming">GNOMAD variant page</stream> link, it will says "Variant Not Found"
+    In fact, if you check the
+    <a href="https://www.omim.org/entry/303630" target="_blank">
+      <button class="btn btn-light" style="color: black;">GnomAD</button>
+    </a>
+    link, it will says <stream style="color: grey;">"Variant Not Found"</stream>
     <br>
-    You also find some useful direct links to check additional variant characteristics and other pages interpretation (ex. <stream id="programming">Franklin</stream> or <stream id="programming">Varsome</stream>)
-    <br>
-    Remember that interpretations differ due to thresholds, hotspots identification etc. but you have to make your own idea about interpretation, manually change it from the <stream id="programming">ACMG</stream> (we'll cover this in a minute) and then accept/discard the variant as Diagnostic finding
-    <br>
-    <br>
-    As you can see at the bottom of this page there is only one sample (<stream id="programming">CASE-0</stream>) that carries this variant
-    <br>
-    Moreover, it is in homozygous (<stream id="programming">hom</stream>) state.
+    <stream style="color: grey; font-size: 80%;">
+    As a general rule, keep in mind that <stream style="color: red;">Diagnosticator</stream>
+    only shows <stream style="text-decoration: underline;">present</stream> fields
+    (to avoid the confusion of presenting hundreds of <stream style="color: white;">N/A</stream>
+    fields for each variant)
+    </stream>
     <br>
     <br>
-    Let's accept this variant as pathogenic for this sample (kidney disease) by clicking on the <stream id="programming">DF</stream> button on its right!
+    You also find several useful <stream style="text-decoration: underline;">direct links</stream>  to check additional variant characteristics and other pages interpretation
+    (ex.
+    <a href="https://franklin.genoox.com/clinical-db/variant/snp/chrX-107866056-G-C" target="_blank">
+      <button class="btn btn-light" style="color: black;">Franklin</button>
+    </a>
+    or
+    <a href="https://varsome.com/variant/hg19/X-107866056-G-C?annotation-mode=germline" target="_blank">
+      <button class="btn btn-light" style="color: black;">Varsone</button>
+    </a>)
+    <br>
+    <stream style="color: grey; font-size: 80%;">
+      (they are gonna ask you to confirm you are not a robot the first time you open one of those)
+    </stream>
+    <br>
+    Remember that interpretations differ due to thresholds, hotspots identification etc.
+    <br>
+    <stream style="color: red; font-weight: bold;">Diagnosticator</stream> only helps you with results presentation:
+    you have to
+    <stream style="font-size: 110%; color: #FFFF00; text-decoration: underline; font-weight: bold;">
+      make your own idea</stream>!
+    <stream style="color: grey; font-size: 80%;">
+    (and then flag the variant accordingly)
+    </stream>
+    <br>
+    <br>
+    In this case, you can see at the bottom of this page that there is only one sample (in your analyzed VCF)
+    that carries this variant:
+    <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>
+    <br>
+    Moreover, it is in homozygous (hom) state.
+    <br>
+    <br>
+    Let's accept this variant as pathogenic for this sample (kidney disease) by clicking on the
+    <button class="btn btn-success">DF</button>
+    button on its right!
   </div>
 </div>
 
