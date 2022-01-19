@@ -386,7 +386,6 @@ def patient_result():
         if not getattr( current_user, STEP ):
             TODO = STEP
             break
-    flash(TODO)
     ### restore: UPDATE USER SET CASE0_page = 0, CASE1_page = 0, CASE3_page = 0, CONTROL0_page = 0, X_107866056_G_C_page = 0, X_107866056_G_C_status = 0, CASE0_status = 0, CASE1_status = 0, CASE3_status = 0, CONTROL0_status = 0, chr5_94833131_G_A_page = 0, chr16_2149869_CAG_C_page = 0, chr16_2149869_CAG_C_ACMG_page = 0, chr16_2149869_CAG_C_status = 0, chr13_32971124_CTG_C_page = 0, chr13_32971124_CTG_C_status = 0, tutorial_completed = 0, message_seen = 0 WHERE id = 1;sqlite> SELECT * from USER;
     return( render_template('patient_result_DXcator_tutorial.html',
                                 title='Sample Result',
