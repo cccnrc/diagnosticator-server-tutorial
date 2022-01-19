@@ -406,6 +406,32 @@ def tutorial_completed( ):
     current_user.tutorial_completed = True
     db.session.commit()
     ### consider communicate it to the server
+    return( redirect( url_for( 'main.index' ) ))
+
+import shutil
+
+@bp.route('/tutorial_restore', methods=['GET', 'POST'])
+@project_required
+@login_required
+@server_valid_authentication_required
+# @project_data_required
+@update_known_variants_redis_DB
+def tutorial_restore( ):
+    '''
+        this is the function to close the tutorial final message
+    '''
+    for STEP in TUTORIAL_ORDER:
+        setattr( current_user, STEP, False )
+    db.session.commit()
+    ### restore JSON files initial status
+    USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], current_user.server_username )
+    os.remove( os.path.join( USER_JSON_FOLDER, 'var_dict.json' ) )
+    os.remove( os.path.join( USER_JSON_FOLDER, 'sample_dict.json' ) )
+    os.remove( os.path.join( USER_JSON_FOLDER, 'gene_dict.json' ) )
+    shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'var_dict.json'), USER_JSON_FOLDER )
+    shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'sample_dict.json'), USER_JSON_FOLDER )
+    shutil.copy2( os.path.join(current_app.config['JSON_FOLDER'], 'gene_dict.json'), USER_JSON_FOLDER )
+    ### consider communicate it to the server
     return( redirect( url_for( 'main.patient_result' ) ))
 
 

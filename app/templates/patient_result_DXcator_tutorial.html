@@ -300,13 +300,21 @@
 </div>
 
 
-<div id="tutorial-results-button" style="text-align: center; display: block; margin-top: 10%;">
-  <a href="{{ url_for('main.expected_results' )}}">
-    <button class="cool-button" id="tutorial-results" style="background-color: #4CAF50;">Expected Results</button>
-  </a>
+<div style="border: 0px solid red; text-align: center; margin-top: 10%;">
+
+  <div id="tutorial-results-button" style="text-align: center; display: inline-block;">
+    <a href="{{ url_for('main.expected_results' )}}">
+      <button class="btn btn-success" id="tutorial-results">Expected Results</button>
+    </a>
+  </div>
+
+  <div id="tutorial-restore-button" style="text-align: center; display: inline-block; margin-left: 5%;">
+    <a href="{{ url_for('main.tutorial_restore' )}}">
+      <button class="btn btn-primary" id="tutorial-restore">Restart Tutorial</button>
+    </a>
+  </div>
+
 </div>
-
-
 
 
 <script type="text/javascript">
@@ -438,7 +446,8 @@
     document.getElementById('outer-CONTROL0').setAttribute("style", "display: none");
     document.getElementById('outer-CONTROL0_STATUS').setAttribute("style", "display: none");
     document.getElementById('tutorial-results').setAttribute("style", "animation-name: increase; animation-duration: 1s; animation-iteration-count: infinite; background-color: #4CAF50;");
-    document.getElementById('outer-MESSAGE').setAttribute("style", "display: none;");
+    document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    // document.getElementById('outer-MESSAGE').setAttribute("style", "display: none;");
   }
   else {
     document.getElementById('outer-CASE0').setAttribute("style", "display: none");
