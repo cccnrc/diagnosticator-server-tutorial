@@ -79,8 +79,11 @@
     <br>
     <br>
     <stream style="color: grey; font-size: 80%;">
-      PS: to come back to the sample page you have to click on its name
-      at the bottom of this page.
+      PS: to come back to the sample page you
+      <stream style="color: red;">
+        have to click on its name
+        at the bottom of this page.
+      </stream>
       <br>
       We know this is not perfect, but it is
       necessary to allow you managing all samples from the same variant page
@@ -116,8 +119,9 @@
     (to avoid the confusion of presenting hundreds of <stream style="color: white;">N/A</stream>
     fields for each variant)
     </stream>
-    <br>
-    <br>
+
+    <div class="divisor"></div>
+
     You also find several useful <stream style="text-decoration: underline;">direct links</stream>  to check additional variant characteristics and other pages interpretation
     (ex.
     <a href="https://franklin.genoox.com/clinical-db/variant/snp/chrX-107866056-G-C" target="_blank">
@@ -133,7 +137,9 @@
     </stream>
     <br>
     Remember that interpretations differ due to thresholds, hotspots identification etc.
-    <br>
+
+    <div class="divisor"></div>
+
     <stream style="color: red; font-weight: bold;">Diagnosticator</stream> only helps you with results presentation:
     you have to
     <stream style="font-size: 110%; color: #FFFF00; text-decoration: underline; font-weight: bold;">
@@ -141,8 +147,9 @@
     <stream style="color: grey; font-size: 80%;">
     (and then flag the variant accordingly)
     </stream>
-    <br>
-    <br>
+
+    <div class="divisor"></div>
+
     In this case, you can see at the bottom of this page that there is only one sample (in your analyzed VCF)
     that carries this variant:
     <a href="{{ url_for('main.patient_page', sample_name = 'CASE-0')}}"><button class="btn btn-info">CASE-0</button></a>

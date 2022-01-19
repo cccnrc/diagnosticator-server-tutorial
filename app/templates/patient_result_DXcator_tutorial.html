@@ -447,7 +447,20 @@
     document.getElementById('outer-CONTROL0_STATUS').setAttribute("style", "display: none");
     document.getElementById('tutorial-results').setAttribute("style", "animation-name: increase; animation-duration: 1s; animation-iteration-count: infinite; background-color: #4CAF50;");
     document.getElementById('outer-FINAL').setAttribute("style", "display: none");
-    // document.getElementById('outer-MESSAGE').setAttribute("style", "display: none;");
+    //document.getElementById('outer-MESSAGE').setAttribute("style", "display: none;");
+  }
+  else if ( TODO_seen == "tutorial_completed" ) {
+    document.getElementById('outer-CASE0').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE0_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE1').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE1_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE3').setAttribute("style", "display: none");
+    document.getElementById('outer-CASE3_STATUS').setAttribute("style", "display: none");
+    document.getElementById('outer-CONTROL0').setAttribute("style", "display: none");
+    document.getElementById('outer-CONTROL0_STATUS').setAttribute("style", "display: none");
+    document.getElementById('tutorial-results').setAttribute("style", "animation-name: increase; animation-duration: 1s; animation-iteration-count: infinite; background-color: #4CAF50;");
+    // document.getElementById('outer-FINAL').setAttribute("style", "display: none");
+    document.getElementById('outer-MESSAGE').setAttribute("style", "display: none;");
   }
   else {
     document.getElementById('outer-CASE0').setAttribute("style", "display: none");

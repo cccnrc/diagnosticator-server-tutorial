@@ -362,8 +362,8 @@ TUTORIAL_ORDER = ([
     "CASE3_status",
     "CONTROL0_page",
     "CONTROL0_status",
-    "message_seen",
-    "tutorial_completed"
+    "tutorial_completed",
+    "message_seen"
 ])
 
 @bp.route('/patient_result', methods=['GET', 'POST'])
@@ -386,6 +386,7 @@ def patient_result():
         if not getattr( current_user, STEP ):
             TODO = STEP
             break
+    flash(TODO)
     ### restore: UPDATE USER SET CASE0_page = 0, CASE1_page = 0, CASE3_page = 0, CONTROL0_page = 0, X_107866056_G_C_page = 0, X_107866056_G_C_status = 0, CASE0_status = 0, CASE1_status = 0, CASE3_status = 0, CONTROL0_status = 0, chr5_94833131_G_A_page = 0, chr16_2149869_CAG_C_page = 0, chr16_2149869_CAG_C_ACMG_page = 0, chr16_2149869_CAG_C_status = 0, chr13_32971124_CTG_C_page = 0, chr13_32971124_CTG_C_status = 0, tutorial_completed = 0, message_seen = 0 WHERE id = 1;sqlite> SELECT * from USER;
     return( render_template('patient_result_DXcator_tutorial.html',
                                 title='Sample Result',
@@ -560,6 +561,12 @@ def variant_page( variant_name ):
     variant_dict = variant_dict[variant_name]
     sampleVARstatus_dict = diagnosticator_rendering_functions.get_samples_VAR_status_JSON( variant_name = variant_name, variant_dict = variant_dict, samples_dict = sample_dict )
     variant_dict = diagnosticator_rendering_functions.arrangeVARdict( variant_dict )
+    ### ACMG update
+    varACMG = diagnosticator_rendering_functions.calculateACMG( variant_dict['ACMG'] )
+    varACMG_dict = diagnosticator_rendering_functions.addACMGkeys( variant_dict['ACMG'] )
+    variant_dict[ 'ACMG' ][ 'ACMG' ] = varACMG
+    for k,v in varACMG_dict.items():
+        variant_dict[ 'ACMG' ].update({ k: v })
     ### for OMIM links
     OMIM_DB = os.path.join( current_app.config['BASEDIR'], 'DB', 'OMIM', 'mim2gene.txt' )
     GENE_OMIM_DICT = diagnosticator_rendering_functions.get_gene_omim_dict( OMIM_DB )

@@ -218,3 +218,13 @@ stream.subpoint {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.divisor {
+  border: 0px;
+  border-bottom: 1px solid #333333;
+  width: 90%;
+  heigth: 0.2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 5%;
+}
