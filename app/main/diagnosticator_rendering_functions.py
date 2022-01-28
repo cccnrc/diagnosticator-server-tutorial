@@ -143,6 +143,31 @@ def get_ACMG_classes_dict():
     return(d)
 
 
+def get_inheritance_abbreviations_dict():
+    d = dict()
+    INH_ABBREVIATION_DICT = ({
+        "Autosomal recessive": "AR",
+        "Autosomal dominant": "AD",
+        "Digenic recessive": "DR",
+        "Somatic mutation": "SMU",
+        "Isolated cases": "IC",
+        "Multifactorial": "MF",
+        "Digenic dominant": "DD",
+        "Somatic mosaicism": "SMO",
+        "Mitochondrial": "MT",
+        "Pseudoautosomal dominant": "PD",
+        "Pseudoautosomal recessive": "PR",
+        "X-linked": "XL",
+        "X-linked recessive": "XLR",
+        "X-linked dominant": "XLD",
+        "Y-linked": "YL",
+        "Unknown": ""
+    })
+    for K,V in INH_ABBREVIATION_DICT.items():
+        d.update({ V: K })
+    return(d)
+
+
 def get_ACMG_strength_dict():
     d = ({
             'pvs1' : { 'display' : 'PVS1', 'description' : 'Pathogenic Very Strong 1: Null variant (nonsense, frameshift, canonical ±1 or 2 splice sites, initiation codon, single or multiexon deletion) in a gene where LOF is a known mechanism of disease', 'btn-class' : 'danger', 'btn-style' : 'opacity: 1;', 'subclass' : [ 'VS', 'S', 'M', 'P', 'NA'] },
@@ -655,3 +680,56 @@ def get_gene_omim_dict( FILE ):
       if GENE:
         GENE_OMIM_DICT.update({ GENE : ID })
     return( GENE_OMIM_DICT )
+
+
+
+
+def get_gene_omim_inheritance_dict( FILE ):
+    '''
+        this function utilizes read_tsv_file to get INHERITANCE in OMIM
+        - DB created with: OMIM_genemap2_coversion.py
+    '''
+    tsv_labels, tsv_data = read_tsv_file( FILE )
+    ### create DICT
+    GENE_OMIM_DICT = dict()
+    for LINE in tsv_data:
+      GENE = LINE[0]
+      DISEASE = LINE[1]
+      TYPE = LINE[2]
+      ID = LINE[3]
+      INH = LINE[4]
+      if GENE:
+          if GENE not in GENE_OMIM_DICT:
+              GENE_OMIM_DICT.update({
+                  GENE : {
+                    ID : {
+                        'DISEASE': DISEASE,
+                        'TYPE': TYPE,
+                        'INH': INH
+                        }
+                    }
+                  })
+          else:
+              GENE_OMIM_DICT[GENE].update({
+                    ID : {
+                        'DISEASE': DISEASE,
+                        'TYPE': TYPE,
+                        'INH': INH
+                        }
+                    })
+    return( GENE_OMIM_DICT )
+
+
+
+def get_gene_list_omim_inheritance_dict( FILE, GENE_NAME_LIST ):
+    '''
+        this is to return a OMIMM inheritance subdict with only genes of interest
+    '''
+    OMIM_DICT = get_gene_omim_inheritance_dict( FILE )
+    RESULT_DICT = dict()
+    for GENE_NAME in GENE_NAME_LIST:
+        GENE_DICT = ({ 'NA' : {'DISEASE': 'NA', 'TYPE': 'NA', 'INH': 'NA'} })
+        if GENE_NAME in OMIM_DICT:
+            GENE_DICT = OMIM_DICT[ GENE_NAME ]
+        RESULT_DICT.update({ GENE_NAME : GENE_DICT })
+    return( RESULT_DICT )

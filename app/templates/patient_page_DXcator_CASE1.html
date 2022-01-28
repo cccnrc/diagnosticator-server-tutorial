@@ -162,7 +162,13 @@
             variant
         </th>
         <th class="ui-helper-center">
+          zigosity
+        </th>
+        <th class="ui-helper-center">
             gene
+        </th>
+        <th class="ui-helper-center">
+            OMIM
         </th>
         <th class="ui-helper-center">
             HGVSc
@@ -188,10 +194,10 @@
           {% endif %}
         {% endif %}
         <tr class="{{ var_status }}">
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
               {{ loop.index }}
           </td>
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
             <a href="{{ url_for('main.variant_page', variant_name = var_name ) }}" >
               <button class="btn btn-info" style="border: 1px solid #308eff; width: 100%; white-space: normal;" id="{{ var_name }}_BUTTON">
                 <div style="word-wrap: break-word; overflow-wrap: break-word; width: 100%;">
@@ -199,7 +205,15 @@
                 </div>
               </button>
           </td>
-          <td class="ui-helper-center">
+          {% set ZIGOSITY = sampleVar_dict[ var_name ][ 'SAMPLES' ][ sample_name ] %}
+          <td class="ui-helper-center" style="vertical-align: middle;">
+          {% if ZIGOSITY == 'hom' %}
+            <stream style="font-weight: bold; font-weight: 110%;">{{ sampleVar_dict[ var_name ][ 'SAMPLES' ][ sample_name ] }}</stream>
+          {% else %}
+            <stream style="">{{ sampleVar_dict[ var_name ][ 'SAMPLES' ][ sample_name ] }}</stream>
+          {% endif %}
+          </td>
+          <td class="ui-helper-center" style="vertical-align: middle;">
             {% set GENENAME = sampleVar_dict[ var_name ][ 'CHARS' ][ 'genename' ] %}
             {% if GENENAME == "" %}
               {% set GENENAME = sampleVar_dict[ var_name ][ 'CHARS' ][ 'SYMBOL' ] %}
@@ -210,16 +224,19 @@
               </button>
             </a>
           </td>
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
+              {{ sampleVar_dict[ var_name ][ 'CHARS' ][ 'gene_OMIM_inh' ] }}
+          </td>
+          <td class="ui-helper-center" style="vertical-align: middle;">
               {{ sampleVar_dict[ var_name ][ 'CHARS' ][ 'HGVSc' ] }}
           </td>
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
               {{ sampleVar_dict[ var_name ][ 'CHARS' ][ 'HGVSp' ] }}
           </td>
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
               {{ sampleVar_dict[ var_name ][ 'ACMG' ][ 'ACMG' ] }}
           </td>
-          <td class="ui-helper-center">
+          <td class="ui-helper-center" style="vertical-align: middle;">
             {% if 'KNOWN' in sampleVar_dict[var_name] %}
               {% if 'P' in sampleVar_dict[var_name]['KNOWN'] %}
               <button class="btn btn-danger" style="color: black;" disabled>

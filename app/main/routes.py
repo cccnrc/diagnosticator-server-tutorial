@@ -36,7 +36,8 @@ def example():
         'ACMG_classes_dict' : diagnosticator_rendering_functions.get_ACMG_classes_dict(),
         'ACMG_strength_dict' : diagnosticator_rendering_functions.get_ACMG_strength_dict(),
         'ACMG_subclass_dict' : diagnosticator_rendering_functions.get_ACMG_subclass_dict(),
-        'abbreviations_dict' : diagnosticator_rendering_functions.get_variant_page_conversion()
+        'abbreviations_dict' : diagnosticator_rendering_functions.get_variant_page_conversion(),
+        'inheritance_abbreviations_dict' : diagnosticator_rendering_functions.get_inheritance_abbreviations_dict()
     })
     return( user_dict )
 
@@ -468,6 +469,39 @@ def patient_page( sample_name ):
         current_user.CONTROL0_page = True
         db.session.commit()
 
+    ### extract possible OMIM inheritance methods for the genes
+    GENE_LIST = []
+    for VAR in sampleVar_dict:
+        if sampleVar_dict[VAR]['CHARS']['genename']:
+            GENE = sampleVar_dict[VAR]['CHARS']['genename']
+            GENE_LIST.append(GENE)
+    OMIM_INHERITANCE_DB = os.path.join( current_app.config['BASEDIR'], 'DB', 'OMIM', 'genemap2.extracted.tsv' )
+    GENES_INH_DICT = diagnosticator_rendering_functions.get_gene_list_omim_inheritance_dict( OMIM_INHERITANCE_DB, GENE_LIST )
+    GENES_INH_DICT_CORRECTED = dict()
+    if GENES_INH_DICT:
+        for GENE in GENES_INH_DICT:
+            GENE_INH = []
+            for DISEASE, DISEASE_SUBDICT in GENES_INH_DICT[GENE].items():
+                DISEASE_OMIM_INH = DISEASE_SUBDICT['INH']
+                if ';' in DISEASE_OMIM_INH:
+                    for INH in DISEASE_OMIM_INH.split(';'):
+                        if INH == "":
+                            INH = 'NA'
+                        if INH not in GENE_INH:
+                            GENE_INH.append(INH)
+                else:
+                    INH = DISEASE_OMIM_INH
+                    if INH not in GENE_INH:
+                        if INH == "":
+                            INH = 'NA'
+                        GENE_INH.append(INH)
+            GENE_INH_CORRECTED = ",".join( map( str, GENE_INH ))
+            GENES_INH_DICT_CORRECTED.update({ GENE: GENE_INH_CORRECTED })
+    for VAR in sampleVar_dict:
+        sampleVar_dict[VAR]['CHARS'].update({ 'gene_OMIM_inh': 'NA' })
+        if sampleVar_dict[VAR]['CHARS']['genename']:
+            sampleVar_dict[VAR]['CHARS'].update({ 'gene_OMIM_inh': GENES_INH_DICT_CORRECTED[sampleVar_dict[VAR]['CHARS']['genename']] })
+
     ### ensure tutorial order
     TODO = "NONE"
     for STEP in TUTORIAL_ORDER:
@@ -554,6 +588,14 @@ def variant_page( variant_name ):
     '''
         this is the function to display single variant page
     '''
+    VARIANT_DICT_ORDER = ([
+        'CHARS',
+        'OMIM',
+        'AF',
+        'CLINVAR',
+        'ACMG',
+        'SAMPLES'
+    ])
     # variant_dict = redis_functions.redis_dict_return( url = current_app.config['REDIS_URL'], database = 2, key_prefix = 'var', key_value = variant_name )
     USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], current_user.server_username )
     variant_dict, sample_dict, gene_dict = load_VAR_SAMPLE_GENE_json_dict( USER_JSON_FOLDER )
@@ -573,6 +615,26 @@ def variant_page( variant_name ):
     if variant_dict['CHARS']['genename']:
         if GENE_OMIM_DICT[variant_dict['CHARS']['genename']]:
             LINKS_DICT.update({ 'OMIM' : "https://www.omim.org/entry/" + GENE_OMIM_DICT[variant_dict['CHARS']['genename']] })
+    ### for OMIMM inheritance
+    OMIM_INHERITANCE_DB = os.path.join( current_app.config['BASEDIR'], 'DB', 'OMIM', 'genemap2.extracted.tsv' )
+    GENE_OMIM_INHERITANCE_DICT = ({ variant_dict['CHARS']['genename']: { 'NA' : {'DISEASE': 'NA', 'TYPE': 'NA', 'INH': 'NA'}} })
+    INHERITANCE_ABBREVIATIONS_DICT = diagnosticator_rendering_functions.get_inheritance_abbreviations_dict()
+    if variant_dict['CHARS']['genename']:
+        GENE_OMIM_INHERITANCE_DICT = diagnosticator_rendering_functions.get_gene_list_omim_inheritance_dict( OMIM_INHERITANCE_DB, [variant_dict['CHARS']['genename']] )[variant_dict['CHARS']['genename']]
+        ### reconvert inheritance abbreviations
+        for DISEASE, DISEASE_SUBDICT in GENE_OMIM_INHERITANCE_DICT.items():
+            if ';' in DISEASE_SUBDICT['INH']:
+                INH_LIST = []
+                for INH in DISEASE_SUBDICT['INH'].split(';'):
+                    if INH in INHERITANCE_ABBREVIATIONS_DICT:
+                        INH_LIST.append( INHERITANCE_ABBREVIATIONS_DICT[INH] )
+                INH_CORRECTED = ";".join( map( str, INH_LIST ))
+            else:
+                if DISEASE_SUBDICT['INH'] in INHERITANCE_ABBREVIATIONS_DICT:
+                    INH_CORRECTED = INHERITANCE_ABBREVIATIONS_DICT[DISEASE_SUBDICT['INH']]
+            GENE_OMIM_INHERITANCE_DICT[DISEASE]['INH'] = INH_CORRECTED
+            GENE_OMIM_INHERITANCE_DICT[DISEASE]['LINK'] = "https://www.omim.org/entry/" + DISEASE
+    variant_dict.update({ 'OMIM' : GENE_OMIM_INHERITANCE_DICT })
     ### for GNOMAD and FRANKLIN and VARSOME link
     if current_user.project_assembly == 'hg19':
         GNOMAD_LINK = "https://gnomad.broadinstitute.org/variant/" + variant_name + "?dataset=gnomad_r2_1"
@@ -591,6 +653,10 @@ def variant_page( variant_name ):
     ### for dbSNP
     DBSNP_LINK = "https://www.ncbi.nlm.nih.gov/snp/?term=" + variant_name
     LINKS_DICT.update({ 'DBSNP' : DBSNP_LINK })
+    ### reorder DICT
+    REORDERED_DICT = dict()
+    for KEY in VARIANT_DICT_ORDER:
+        REORDERED_DICT.update({ KEY: variant_dict[KEY] })
     ### for the tutorial I need a single HTML page for each sample
     HTML_PAGE = 'variant_page_DXcator_' + variant_name.replace('-','_') + '.html'
     ### record tutorial progress
@@ -618,7 +684,7 @@ def variant_page( variant_name ):
         return( render_template( HTML_PAGE,
                                         title = variant_name,
                                         variant_name =variant_name,
-                                        variant_dict = variant_dict,
+                                        variant_dict = REORDERED_DICT,
                                         sampleVARstatus_dict = sampleVARstatus_dict,
                                         LINKS_DICT = LINKS_DICT,
                                         TODO = TODO
@@ -627,7 +693,7 @@ def variant_page( variant_name ):
         return( render_template('variant_page_DXcator.html',
                                     title = variant_name,
                                     variant_name =variant_name,
-                                    variant_dict = variant_dict,
+                                    variant_dict = REORDERED_DICT,
                                     LINKS_DICT = LINKS_DICT,
                                     sampleVARstatus_dict = sampleVARstatus_dict
                                     ))

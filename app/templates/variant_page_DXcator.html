@@ -94,6 +94,14 @@
             </td>
         </tr>
 
+        {% elif k_family == 'OMIM' %}
+        <!-- separator -->
+        <tr style="background-color: black; font-weight: bold; color: white;" >
+            <td class="ui-helper-center" colspan="2" style="border: collapse;" >
+              OMIM Disease
+            </td>
+        </tr>
+
         {% elif k_family == 'KNOWN' %}
         <!-- separator -->
         <tr style="background-color: black; font-weight: bold; color: white;" >
@@ -172,6 +180,24 @@
                 </button>
             </td>
           </tr>
+
+          {% elif k_family == 'OMIM' %}
+          <!-- separator -->
+            <tr class="">
+              <td class="ui-helper-center" style="font-weight: bold; vertical-align: middle;">
+                <a href="{{ v['LINK'] }}" target="_blank">
+                  <button class="btn btn-info">
+                    {{ v['DISEASE'] }}
+                  </button>
+                </a>
+                  {% if v['TYPE'] != 'disease' %}
+                    ({{ v['TYPE'] }})
+                  {% endif %}
+              </td>
+              <td class="ui-helper-center" style="vertical-align: middle;">
+                  {{ v['INH'] }}
+              </td>
+            </tr>
 
         {% elif k_family == 'ACMG' %}
         <tr class="">
