@@ -228,3 +228,20 @@ stream.subpoint {
   margin-bottom: 1%;
   margin-left: 5%;
 }
+
+
+
+div.description-container {
+  border: 0px solid red;
+  height: 50px;
+  font-weight: normal;
+  text-align: center;
+  font-size: 100%;
+  margin-top: 2%;
+}
+
+div#testText {
+  display: none;
+  font-weight: bold;
+  font-size: 120%;
+}

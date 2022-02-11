@@ -17,6 +17,18 @@
     .ui-helper-center {
         text-align: center;
     }
+    div.description-container {
+      border: 0px solid red;
+      height: 70px;
+      font-weight: normal;
+      text-align: center;
+      font-size: 100%;
+    }
+    div#testText {
+      display: none;
+      font-weight: bold;
+      font-size: 120%;
+    }
 </style>
 
 
@@ -53,9 +65,9 @@
     {{ ACMG_classes_dict[ varACMG ][ 'display' ] }}
   </button>
   </a>
-  <div style='font-weight: normal; text-align: center; font-size: 100%;'>
-  <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
-  <div id='testText' style='display: none; font-weight: bold; font-size: 120%'>
+  <div class='description-container'>
+    <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
+    <div id='testText'></div>
   </div>
 </div>
 

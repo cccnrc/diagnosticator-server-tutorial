@@ -334,6 +334,7 @@ def analyzeVCF_ASILO( filename ):
         flash('An analyze VCF task is currently in progress. Wait it to finish...', 'warning')
     else:
         current_user.launch_task( 'analyzeVCF_ASILO_task', 'Analyzing VCF {}...'.format( filename ), file_path, known_dict, url = current_app.config['REDIS_URL'], database = 2 )
+        current_user.last_case_seen = None
         db.session.commit()
     return( redirect( url_for( 'main.index' ) ) )
 
@@ -381,6 +382,10 @@ def patient_result():
     variant_dict, sample_dict, gene_dict = load_VAR_SAMPLE_GENE_json_dict( USER_JSON_FOLDER )
     ### get number of P/LP variants for each sample
     sampleHTMLdict = diagnosticator_rendering_functions.getSamplesHTMLdict( sample_dict, variant_dict  )
+    ### point to last case seen
+    LAST_CASE_URL = None
+    if current_user.last_case_seen:
+        LAST_CASE_URL = url_for('main.patient_page', sample_name = current_user.last_case_seen )
     ### ensure ORDER for tutorial actions
     TODO = "NONE"
     for STEP in TUTORIAL_ORDER:
@@ -391,6 +396,7 @@ def patient_result():
     return( render_template('patient_result_DXcator_tutorial.html',
                                 title='Sample Result',
                                 sampleHTMLdict = sampleHTMLdict,
+                                LAST_CASE_URL = LAST_CASE_URL,
                                 TODO = TODO
                                 ))
 
@@ -508,6 +514,9 @@ def patient_page( sample_name ):
         if not getattr( current_user, STEP ):
             TODO = STEP
             break
+    ### store last case seen
+    current_user.last_case_seen = sample_name
+    db.session.commit()
     ### return PAGE
     try:
         return( render_template( HTML_PAGE,
@@ -679,7 +688,10 @@ def variant_page( variant_name ):
         if not getattr( current_user, STEP ):
             TODO = STEP
             break
-    #flash(TODO, 'success')
+    ### store last case seen
+    LAST_CASE_URL = None
+    if current_user.last_case_seen:
+        LAST_CASE_URL = url_for('main.patient_page', sample_name = current_user.last_case_seen )
     try:
         return( render_template( HTML_PAGE,
                                         title = variant_name,
@@ -687,6 +699,7 @@ def variant_page( variant_name ):
                                         variant_dict = REORDERED_DICT,
                                         sampleVARstatus_dict = sampleVARstatus_dict,
                                         LINKS_DICT = LINKS_DICT,
+                                        LAST_CASE_URL = LAST_CASE_URL,
                                         TODO = TODO
                                         ))
     except:
@@ -695,6 +708,7 @@ def variant_page( variant_name ):
                                     variant_name =variant_name,
                                     variant_dict = REORDERED_DICT,
                                     LINKS_DICT = LINKS_DICT,
+                                    LAST_CASE_URL = LAST_CASE_URL,
                                     sampleVARstatus_dict = sampleVARstatus_dict
                                     ))
 
@@ -848,9 +862,14 @@ def gene_page( gene_name ):
     USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], current_user.server_username )
     variant_dict, sample_dict, gene_dict = load_VAR_SAMPLE_GENE_json_dict( USER_JSON_FOLDER )
     gene_dict = gene_dict[gene_name]
+    ### pass last_case_seen
+    LAST_CASE_URL = None
+    if current_user.last_case_seen:
+        LAST_CASE_URL = url_for('main.patient_page', sample_name = current_user.last_case_seen )
     return( render_template( 'gene_page_DXcator.html',
                                 gene_name = gene_name,
-                                gene_dict = gene_dict
+                                gene_dict = gene_dict,
+                                LAST_CASE_URL = LAST_CASE_URL
                 ))
 
 
@@ -867,8 +886,13 @@ def gene_result( ):
     USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], current_user.server_username )
     variant_dict, sample_dict, gene_dict = load_VAR_SAMPLE_GENE_json_dict( USER_JSON_FOLDER )
     geneHTMLdict = diagnosticator_rendering_functions.get_all_genes_dict_JSON( gene_dict, variant_dict )
+    ### pass last_case_seen
+    LAST_CASE_URL = None
+    if current_user.last_case_seen:
+        LAST_CASE_URL = url_for('main.patient_page', sample_name = current_user.last_case_seen )
     return( render_template( 'gene_result_DXcator.html',
-                                geneHTMLdict = geneHTMLdict
+                                geneHTMLdict = geneHTMLdict,
+                                LAST_CASE_URL = LAST_CASE_URL
                 ))
 
 

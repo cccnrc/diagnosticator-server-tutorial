@@ -8,51 +8,6 @@
 
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
-<style>
-    .AC {
-        background-color: #ccffa6;
-    }
-    .AR {
-        background-color: #ebffdb;
-    }
-    .US {
-        background-color: #dbdbdb;
-    }
-    .RR {
-        background-color: #ffdede;
-    }
-    .RE {
-        background-color: #ffb0b0;
-    }
-    .SE {
-        background-color: #b8c8ff;
-    }
-    .SR {
-        background-color: #d9e1ff;
-    }
-    .IP {
-        background-color: #fffcd9;
-    }
-    .NA {
-        background-color: #ffffff;
-    }
-    .ui-helper-center {
-        text-align: center;
-    }
-
-    td {
-        word-wrap: break-word;         /* All browsers since IE 5.5+ */
-        overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
-    }
-
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
-
-
-</style>
-
 
 <div class="fadeMe" id="outer-CASE0">
   <div class="inner" >
@@ -229,7 +184,17 @@
 
 
 
-
+<div style="display: inline-block; float: left;" >
+  <a href="{{ LAST_CASE_URL }}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      {% if LAST_CASE_URL %}
+        {{ current_user.last_case_seen }} <stream style="font-size: 80%;">(back)</stream>
+      {% else %}
+        Back
+      {% endif %}
+    </button>
+  </a>
+</div>
 <div style="display: inline-block; float: right; " >
   <a href="{{ url_for('main.patient_result' )}}">
     <button class="btn btn-info" style="border: 1px solid #308eff;">

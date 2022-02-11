@@ -3,52 +3,21 @@
 
 {% block app_content %}
 
-
-<style>
-    .AC {
-        background-color: #ccffa6;
-    }
-    .AR {
-        background-color: #ebffdb;
-    }
-    .US {
-        background-color: #dbdbdb;
-    }
-    .RR {
-        background-color: #ffdede;
-    }
-    .RE {
-        background-color: #ffb0b0;
-    }
-    .SE {
-        background-color: #b8c8ff;
-    }
-    .SR {
-        background-color: #d9e1ff;
-    }
-    .IP {
-        background-color: #fffcd9;
-    }
-    .NA {
-        background-color: #ffffff;
-    }
-    .ui-helper-center {
-        text-align: center;
-    }
-
-    td {
-        word-wrap: break-word;         /* All browsers since IE 5.5+ */
-        overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
-    }
-
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
-
-</style>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/tutorial.css') }}">
 
 
+
+<div style="display: inline-block; float: left;" >
+  <a href="{{ LAST_CASE_URL }}">
+    <button class="btn btn-info" style="border: 1px solid #308eff;">
+      {% if LAST_CASE_URL %}
+        {{ current_user.last_case_seen }} <stream style="font-size: 80%;">(back)</stream>
+      {% else %}
+        Back
+      {% endif %}
+    </button>
+  </a>
+</div>
 <div style="display: inline-block; float: right; " >
   <a href="{{ url_for('main.patient_result' )}}">
     <button class="btn btn-info" style="border: 1px solid #308eff;">
@@ -137,9 +106,9 @@
           <!-- this is to show the button description -->
           <tr>
             <td colspan="2">
-            <div style='font-weight: normal; text-align: center; font-size: 100%;'>
-            <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
-            <div id='testText' style='display: none; font-weight: bold; font-size: 120%'>
+            <div class="description-container">
+              <stream style="color: grey;">Button description (point mouse on button to appear)</stream>:
+              <div id='testText'></div>
             </div>
             </td>
           </tr>

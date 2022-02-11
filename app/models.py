@@ -55,6 +55,7 @@ class User( UserMixin, db.Model ):
     chr13_32971124_CTG_C_status = db.Column(db.Boolean, default=False)
     message_seen =  db.Column(db.Boolean, default=False)
     tutorial_completed =  db.Column(db.Boolean, default=False)
+    last_case_seen = db.Column(db.String(140), default=None)
     messages_received = db.relationship('Message',
                                         foreign_keys='Message.recipient_id',
                                         backref='recipient', lazy='dynamic')
