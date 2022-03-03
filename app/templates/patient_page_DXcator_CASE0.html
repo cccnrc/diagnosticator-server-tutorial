@@ -10,7 +10,7 @@
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     This is the page in which you see a specific sample results
     <br>
-    Variant are listed in decreasing pathogenicity order (suspected) with summary characteristics presented
+    Variant are listed in decreasing (suspected) pathogenicity order with summary characteristics presented
     <br>
     <br>
     <div class="list">
@@ -19,7 +19,7 @@
       - it also looks that this variant has already been reported as Pathogenic by another user (KNOWN column)
     </div>
     <br>
-    Let's have a look at the suspected variant
+    Let's have a look at the suspected variant, by clicking on its name
   </div>
 </div>
 
@@ -36,18 +36,18 @@
   <div class="inner" id="inner" style="">
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Great job! You accepted the COL4A5 variant as Diagnostic Finding and you can now see the
-    <button class="btn btn-success">green</button>
+    <button disabled class="btn btn-success">green</button>
     background on it
     <br>
-    We identified a COL4A5 homozygous variant in a kidney disease patient, looks like we have a diagnosis!
+    We identified a COL4A5 hemizygous variant in a kidney disease patient, looks like we have a diagnosis!
     <br>
     Let's mark this patient as
-    <button class="btn btn-success">Positive Diagnostic Finding</button>
+    <button disabled class="btn btn-success">Positive Diagnostic Finding</button>
     as well:
     <br>
     <div class="list">
       - the <stream style="text-decoration: underline;">Status</stream>
-      field indicates which status you asisgned to this sample (empty if you did not assign any yet).
+      field indicates which status you assigned to this sample (empty if you did not assign any yet).
       <br>
       - to change the Status click on the desired status below <stream style="text-decoration: underline;">Change Status</stream> buttons and see how it changes (hover for a little description, full exaplanation
       <a href="{{ url_for('main.status_explanation') }}" target="_blank">
@@ -65,14 +65,14 @@
     <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>X</span>
     Great job! You made your first diagnosis!
     <br>
-    In the real application this will be stored in server so anytime you will find that variant again in any other of your VCFs
+    <br>
+    In the real application this will be stored in the server, anytime you find that variant again in any other of your VCFs
     it will be automatically flagged as
-    <stream style="text-decoration: underline;">known P/LP</stream>,
-    to avoid you analyze the same variant over and over again
-    in different samples
+    <stream style="text-decoration: underline; color: red;">known P/LP</stream>,
+    to avoid you analyzing the same variant in different samples over and over again
     <br>
     <br>
-    Let's get back at the
+    Let's go back at the
     <a href="{{ url_for('main.patient_result') }}">
       <button class="btn btn-light" style="color: black;">Samples Main Page</button>
     </a> to review another patient!

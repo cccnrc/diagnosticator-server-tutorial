@@ -77,9 +77,6 @@ div.fadeMe {
   font-size: 150%;
   padding: 1% 1%;
   color: white;
-  animation-name: borderbw;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
 }
 
 .circle {

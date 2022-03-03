@@ -120,12 +120,12 @@ def get_classes_dict ():
     d = ({
             'AC' : { 'display' : 'DF', 'description' : 'Positive Diagnostic Finding', 'btn-class' : 'success', 'btn-style' : 'opacity: 1;' },
             'SE' : { 'display' : 'SF', 'description' : 'Secondary Diagnostic Finding', 'btn-class' : 'primary', 'btn-style' : 'opacity: 1;' },
-            'RE' : { 'display' : 'NE', 'description' : 'Negative', 'btn-class' : 'danger', 'btn-style' : 'opacity: 1;' },
+            'RE' : { 'display' : 'NR', 'description' : 'Negative', 'btn-class' : 'danger', 'btn-style' : 'opacity: 1;' },
             'US' : { 'display' : 'US', 'description' : 'Unknown Significance', 'btn-class' : 'warning', 'btn-style' : 'opacity: 1;' },
-            'AR' : { 'display' : 'Dr', 'description' : 'Positive Diagnostic Finding (temporary)', 'btn-class' : 'success', 'btn-style' : 'opacity: 0.5;' },
-            'SR' : { 'display' : 'Sr', 'description' : 'Secondary Diagnostic Finding (temporary)', 'btn-class' : 'primary', 'btn-style' : 'opacity: 0.5;' },
-            'RR' : { 'display' : 'Nr', 'description' : 'Negative (temporary)', 'btn-class' : 'danger', 'btn-style' : 'opacity: 0.5;' },
-            'UR' : { 'display' : 'Ur', 'description' : 'Unknown Significance (temporary)', 'btn-class' : 'warning', 'btn-style' : 'opacity: 0.5;' },
+            'AR' : { 'display' : 'DFt', 'description' : 'Positive Diagnostic Finding (temporary)', 'btn-class' : 'success', 'btn-style' : 'opacity: 0.5;' },
+            'SR' : { 'display' : 'SFt', 'description' : 'Secondary Diagnostic Finding (temporary)', 'btn-class' : 'primary', 'btn-style' : 'opacity: 0.5;' },
+            'RR' : { 'display' : 'NRt', 'description' : 'Negative (temporary)', 'btn-class' : 'danger', 'btn-style' : 'opacity: 0.5;' },
+            'UR' : { 'display' : 'USt', 'description' : 'Unknown Significance (temporary)', 'btn-class' : 'warning', 'btn-style' : 'opacity: 0.5;' },
             'IP' : { 'display' : 'IP', 'description' : 'In Progress', 'btn-class' : 'basic', 'btn-style' : 'opacity: 1;' },
             'NA' : { 'display' : 'restore', 'description' : 'default', 'btn-class' : 'default', 'btn-style' : 'opacity: 1;' }
     })
