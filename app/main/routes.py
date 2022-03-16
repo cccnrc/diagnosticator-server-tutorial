@@ -20,6 +20,7 @@ from uuid import getnode as get_mac
 from app.variant_functions import send_local_variants, get_known_variants, get_all_known_variants, get_report_statuses, send_local_var, get_server_new_messages_dict
 from app.main.forms import SearchForm, FilterForm
 import json
+from flask_paginate import Pagination, get_page_args
 
 
 ######################################################################
@@ -452,6 +453,18 @@ def patient_page( sample_name ):
     '''
         this is the function to display single patient page
     '''
+
+    ### pagination
+    page = int(request.args.get('page', 1))
+    per_page = 10
+    start_page = (page - 1) * per_page
+    end_page = (page) * per_page
+    # search
+    search = False
+    q = request.args.get('q')
+    if q:
+        search = True
+
     USER_JSON_FOLDER = os.path.join( current_app.config['JSON_FOLDER'], current_user.server_username )
     variant_dict, sample_dict, gene_dict = load_VAR_SAMPLE_GENE_json_dict( USER_JSON_FOLDER )
     sample_dict = sample_dict[sample_name]
@@ -459,6 +472,17 @@ def patient_page( sample_name ):
     sample_dict = diagnosticator_rendering_functions.check_status_in_dict( sample_dict )
     sampleVar_dict = diagnosticator_rendering_functions.getSampleVariantsJSON( sample_dict, variant_dict )
     sampleVar_dict = diagnosticator_rendering_functions.orderDictByScore( sampleVar_dict )
+
+    # extract only variants per page
+    sampleVar_dict_keys_to_render = list( sampleVar_dict.keys() )[start_page:end_page]
+    # create pagination on variant dict
+    pagination = Pagination(page=page, per_page=per_page, offset=start_page,
+                           total=len(sampleVar_dict), css_framework='bootstrap3',
+                           search=search)
+    # extract only subdict to render
+    sampleVar_dict_to_render = {k:sampleVar_dict[k] for k in sampleVar_dict_keys_to_render if k in sampleVar_dict}
+
+
     ### for the tutorial I need a single HTML page for each sample
     HTML_PAGE = 'patient_page_DXcator_' + sample_name.replace('-','') + '.html'
     ### record tutorial progress
@@ -477,7 +501,7 @@ def patient_page( sample_name ):
 
     ### extract possible OMIM inheritance methods for the genes
     GENE_LIST = []
-    for VAR in sampleVar_dict:
+    for VAR in sampleVar_dict_to_render:
         if sampleVar_dict[VAR]['CHARS']['genename']:
             GENE = sampleVar_dict[VAR]['CHARS']['genename']
             GENE_LIST.append(GENE)
@@ -503,7 +527,7 @@ def patient_page( sample_name ):
                         GENE_INH.append(INH)
             GENE_INH_CORRECTED = ",".join( map( str, GENE_INH ))
             GENES_INH_DICT_CORRECTED.update({ GENE: GENE_INH_CORRECTED })
-    for VAR in sampleVar_dict:
+    for VAR in sampleVar_dict_to_render:
         sampleVar_dict[VAR]['CHARS'].update({ 'gene_OMIM_inh': 'NA' })
         if sampleVar_dict[VAR]['CHARS']['genename']:
             sampleVar_dict[VAR]['CHARS'].update({ 'gene_OMIM_inh': GENES_INH_DICT_CORRECTED[sampleVar_dict[VAR]['CHARS']['genename']] })
@@ -522,16 +546,18 @@ def patient_page( sample_name ):
         return( render_template( HTML_PAGE,
                                     title = sample_name,
                                     sample_dict = sample_dict,
-                                    sampleVar_dict = sampleVar_dict,
+                                    sampleVar_dict = sampleVar_dict_to_render,
                                     sample_name = sample_name,
-                                    TODO = TODO
+                                    TODO = TODO,
+                                    pagination = pagination
                                     ))
     except:
         return( render_template( 'patient_page_DXcator.html',
                                     title = sample_name,
                                     sample_dict = sample_dict,
-                                    sampleVar_dict = sampleVar_dict,
-                                    sample_name = sample_name
+                                    sampleVar_dict = sampleVar_dict_to_render,
+                                    sample_name = sample_name,
+                                    pagination = pagination
                                     ))
 
 
